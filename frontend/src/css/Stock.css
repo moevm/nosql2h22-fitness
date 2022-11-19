@@ -1,0 +1,45 @@
+.stock{
+    height: 322px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #edf0f4;
+    line-height: 40px;   
+}
+
+.stock__content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-width: 40%;
+    text-align: left;
+    padding: 50px;
+}
+
+.stock__content .title{
+    /* margin: 20px 50px; */
+    font-size: 48px;
+    font-weight: bold;
+    color: #3b4754;
+}
+
+.stock__content .text{
+    /* margin: 20px 50px; */
+    font-size: 24px;
+    font-weight:normal;
+    color: #798da3;
+}
+
+/* .stock__img{
+    min-width: 40%;
+} */
+
+.more__btn{
+    width: 188px;
+    height: 42px;
+    padding: 0 10px;
+    background-color: #29323d;
+    color: white;
+    border-radius: 21px;
+    font-size: 14px;
+    font-weight: bold;
+}

@@ -1,0 +1,37 @@
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+.social a {
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    background:#fff;
+    border: 1px solid #ccc;
+    border-radius: 24px;
+    padding: 5px 0;
+    color: #3b4754;
+}
+.telegram a:hover {background: #249bd7; color: #fff;}
+.instagram a:hover {background: #3f729b; color: #fff;}
+.vk a:hover {background: #5d84ae; color: #fff;}
+
+.footer{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px;
+}
+
+.footer .social{
+    display: flex;
+    margin: 8px 0;
+}
+
+.footer img{
+    width: 10%;
+}
+
+.footer p{
+    margin: 20px 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    color: #798da3;
+}
