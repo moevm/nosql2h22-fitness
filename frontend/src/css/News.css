@@ -1,0 +1,32 @@
+.news__content{
+    display: flex;
+    justify-content: space-around;
+}
+
+.news__content_item img{
+    width: 200px;
+    height: 200px;
+}
+
+.news__content_item .front{
+    width: 200px;
+    min-height: 280px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 5px #798da3;
+    
+}
+
+.news__content_item .front p{
+    margin: 10px;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 20px;
+    color: #798da3;
+}
+
+.news .title{
+    margin: 20px 50px;
+    font-size: 26px;
+    font-weight: bold;
+    color: #3b4754;
+}

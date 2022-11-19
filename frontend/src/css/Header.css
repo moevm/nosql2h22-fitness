@@ -1,0 +1,30 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 50px;
+    background-color: white;
+    font-size: 16px;
+    font-weight: bold;
+    color: #3b4754;
+    line-height: 20px;
+}
+
+.header img{
+    width: 10%;
+}
+
+.header table{
+    min-width: 50%;
+}
+
+#login{
+    width: 8%;
+    height: 36px;
+    background-color: #29323d;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    border-radius: 5px;
+}
