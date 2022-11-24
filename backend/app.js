@@ -4,10 +4,8 @@ const express = require("express");
 const app = express();
 
 const fs = require("fs");
-
-// создаем парсер для данных application/x-www-form-urlencoded
-const urlencodedParser = express.urlencoded({extended: false});
-
+const port = 3001;
+let test_route = require('./routes/test');
 
 // Обработчик перед отправкой ответа клиенту.
 app.use(function(request, response, next){
@@ -22,25 +20,13 @@ app.use(function(request, response, next){
     next();
 });
 
-app.use("/public", express.static(__dirname + "/public"));
-app.use("/view",express.static(__dirname + "/view"))
+app.use('/', test_route);
  
 app.get("/", function(request, response){
-    response.send("<h1>Главная страница</h1>");
+    response.send("<h1>Главная страница сервера</h1>");
 });
-
-app.get("/form", function(request, response){
-    response.sendFile(__dirname + "/view/form.html")
-});
-
-app.post("/form", urlencodedParser, function (request, response) {
-    if(!request.body) return response.sendStatus(400);
-    console.log(request.body);
-    response.send(`${request.body.userName} - ${request.body.userAge}`);
-});
-
 
 // начинаем прослушивать подключения на 3000 порту
-app.listen(3000, ()=>{
-    console.log("Server started at http://localhost:3000");
+app.listen(port, ()=>{
+    console.log("Server started at http://localhost:3001");
 });
