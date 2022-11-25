@@ -2,12 +2,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 50px;
+    padding: 0 50px;
     background-color: white;
     font-size: 16px;
     font-weight: bold;
     color: #3b4754;
     line-height: 20px;
+    border-bottom: 1px solid #edf0f4;
 }
 
 .header img{
@@ -19,7 +20,7 @@
     min-width: 50%;
 }
 
-#login{
+#login_btn{
     width: 8%;
     height: 36px;
     background-color: #29323d;
@@ -28,6 +29,18 @@
     font-weight: bold;
     line-height: 20px;
     border-radius: 5px;
+}
+
+.PA_box{
+    display: flex;
+    align-items: center;
+}
+
+#PA_btn{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10px;
 }
 
 .header td:hover{
