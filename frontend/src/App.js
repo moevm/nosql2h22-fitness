@@ -1,20 +1,16 @@
 import './App.css';
-import AboutUs from './components/AboutUs';
-import Footer from './components/Footer';
 import Header from './components/Header';
-import News from './components/News';
-import Stock from './components/Stock';
-import Subscribe from './components/Subscribe';
+import AppRoutes from './components/AppRoutes';
+
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
     return (
         <div className="App">
-            <Header/>
-            <Stock/>
-            <AboutUs/>
-            <News/>
-            <Subscribe/>
-            <Footer/>
+            <BrowserRouter>
+                <Header/>
+                <AppRoutes/>
+            </BrowserRouter>
         </div>
     );
 }

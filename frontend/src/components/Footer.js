@@ -8,11 +8,11 @@ function Footer() {
                 <div className="social telegram">
                     <a href="#" target="_blank"><i className="fa fa-paper-plane fa-2x"></i></a>
                 </div>
-                <div class="social instagram">
-                    <a href="#" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+                <div className="social instagram">
+                    <a href="#" target="_blank"><i className="fa fa-instagram fa-2x"></i></a>
                 </div>
-                <div class="social vk">
-                    <a href="#" target="_blank"><i class="fa fa-vk fa-2x"></i></a>    
+                <div className="social vk">
+                    <a href="#" target="_blank"><i className="fa fa-vk fa-2x"></i></a>    
                 </div>
             </div>
             <img src={logo} alt='LOGO'></img>

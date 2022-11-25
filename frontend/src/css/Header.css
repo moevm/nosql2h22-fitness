@@ -12,6 +12,7 @@
 
 .header img{
     width: 10%;
+    cursor: pointer;
 }
 
 .header table{
@@ -27,4 +28,9 @@
     font-weight: bold;
     line-height: 20px;
     border-radius: 5px;
+}
+
+.header td:hover{
+    background-color: #edf0f4;
+    cursor: pointer;
 }
