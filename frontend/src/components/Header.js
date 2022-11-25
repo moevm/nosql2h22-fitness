@@ -11,6 +11,32 @@ function Header() {
         navigate(path);
     };
 
+    const selectButton = e => {
+        console.log(sessionStorage)
+        if(!sessionStorage.length)
+            return(
+                <button id='login_btn' onClick={() => openPage('/login')}>ВОЙТИ</button>
+            );
+        else{
+            if(localStorage.getItem('autoriz') === 'admin'){
+                return(
+                    <div className='PA_box'>
+                        <p>Администратор</p>
+                        <button id='PA_btn' onClick={() => openPage('/user/admin')}>ЛК</button>
+                    </div>
+                );
+            }
+            else{
+                return(
+                    <div>
+                        <button>ув</button>
+                        <button>ЛК</button>
+                    </div>
+                );
+            }
+        }
+    };
+
     return (
         <div className="header">
             <img src={logo} alt='LOGO' onClick={() => openPage('/')}></img>
@@ -28,9 +54,9 @@ function Header() {
                     </tr>
                 </thead>
             </table>
-            <button id='login' onClick={() => openPage('/login')}>ВОЙТИ</button>
+            {selectButton()}
         </div>
     );
-}
+};
 
 export default Header;

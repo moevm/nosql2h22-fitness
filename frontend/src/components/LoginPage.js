@@ -20,12 +20,10 @@ export default function LoginPage(){
                     <button
                         className={`tabs__btn ${singIn ? 'tabs__btn_active' : ''}`}
                         onClick={openTab}
-                        value='singIn'
                     >Вход</button>
                     <button
                         className={`tabs__btn ${singIn ? '' : 'tabs__btn_active'}`}
                         onClick={openTab}
-                        value='singUp'
                     >Регистрация</button>
                 </div>
                 <div>

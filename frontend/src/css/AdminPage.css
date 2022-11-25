@@ -1,0 +1,53 @@
+.adminPage__box{
+    display: flex;
+    flex-direction: column;
+    padding: 50px 10px;
+}
+
+.adminPage_tab{
+    width: 50%;
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.adminPage_tab .tabs__btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 16px;
+    font-weight: normal;
+    color: #000;
+    line-height: 24px;
+    width: 30%;
+    border: 1px solid #000;
+    cursor: pointer;
+    border-radius: 10px 10px 0 0;
+    background-color: white;
+}
+
+.adminPage_tab .tabs__btn_active {
+    background: #e0e0e0;
+    cursor: default;
+}
+
+.tabs__btn:not(.tabs__btn_active):hover,
+.tabs__btn:not(.tabs__btn_active):focus {
+    background-color: #eee;
+}
+
+.table_box table{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid #d2d2d2;
+}
+
+.table_box th{
+    border: 1px solid #d2d2d2;
+    font-size: 16px;
+    background: #eeeded;
+    padding: 8px;
+}
+
+.table_box td{
+    border: 1px solid #d2d2d2;
+}
