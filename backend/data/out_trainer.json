@@ -1,18 +1,1 @@
-[
-    {
-        "FIO": "Коренева Оксана Семеновна", 
-        "email": "oxi1970@mail.ru", 
-        "telephone": "89214345678", 
-        "listOfClients": [
-            {"FIO": "Атаманов Сергей Сергеевич", "email": "pivozavr2022@yandex.ru", "telephone": "83687564567"},
-            {"FIO": "Паутова Юлия Владимировна", "email": "yula2019@gmail.com", "telephone": "83687564567"}]
-    },
-    {
-        "FIO": "Попков Дмитрий Сергеевич", 
-        "email": "dimon_1996@yandex.ru", 
-        "telephone": "83687564567", 
-        "listOfClients": [
-            {"FIO": "Рослова Лариса Сергеевна", "email": "orfei2011@mail.ru", "telephone": "83687564567"}]
-    }
-    
-    ]
+[{"_id":"63851f7a47e30d72b4e09fa2","FIO":"Коренева Оксана Семеновна","email":"oxi1970@mail.ru","telephone":"89214345678","listOfClients":[{"FIO":"Атаманов Сергей Сергеевич","email":"pivozavr2022@yandex.ru","telephone":"83687564567"},{"FIO":"Паутова Юлия Владимировна","email":"yula2019@gmail.com","telephone":"83687564567"}]},{"_id":"63851f7a47e30d72b4e09fa3","FIO":"Попков Дмитрий Сергеевич","email":"dimon_1996@yandex.ru","telephone":"83687564567","listOfClients":[{"FIO":"Рослова Лариса Сергеевна","email":"orfei2011@mail.ru","telephone":"83687564567"}]}]

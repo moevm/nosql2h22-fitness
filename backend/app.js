@@ -55,7 +55,7 @@ mongo.connect(function(err, client){
         console.log('Inserted docs_users:', result.insertedCount);
     });
 
-    require('./routes/client_route')(app, clients_collection);
+    require('./routes/client_route')(app, db);
     require('./routes/trainer_route')(app, trainer_collection);
     require('./routes/users_route')(app, db);
 

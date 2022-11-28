@@ -1,27 +1,28 @@
 var ObjectID = require('mongodb').ObjectID;
 module.exports = function(app, collection) {
-    
-    // Запись в коллекцию нового документа
-    app.post('/trainers', (req, res) => {
-        const note = { text: req.body.body, title: req.body.title };
-        collection.insertOne(note, (err, result) => {
-          if (err) { 
-            res.send({ 'error': 'An error has occurred' }); 
-          } else {
-            res.send("Server got your note!");
-          }
-        });
-      });
 
-    // Получение документа по айди
-    app.get('/trainers/:id', (req, res) => {
-        const id = req.params.id;
-        const details = { '_id': new ObjectID(id) };
-        collection.findOne(details, (err, item) => {
+    // Фильтрация по имени
+    app.get('/trainers/filter/:fio', (req, res) => {
+        const fio = req.params.fio;
+        async function filter() {
+            try {
+            const tmp = await collection.find({FIO: fio}).toArray();
+                res.send(tmp)
+            }catch(err) {
+                console.log(err);
+            }
+        }
+        filter()
+    });
+    
+    // Получение документа по имени
+    app.get('/trainers/:fio', (req, res) => {
+        const fio = req.params.fio;
+        collection.findOne({FIO: fio}, (err, item) => {
             if (err) {
                 res.send({'error':'An error has occurred'});
             } else {
-                res.send(item);
+                res.send(item)
             } 
         });
     });
@@ -40,7 +41,4 @@ module.exports = function(app, collection) {
         }
         getAllDocuments();
     })
-
-
-
 }
