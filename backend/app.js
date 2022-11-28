@@ -57,7 +57,7 @@ mongo.connect(function(err, client){
 
     require('./routes/client_route')(app, clients_collection);
     require('./routes/trainer_route')(app, trainer_collection);
-    require('./routes/users_route')(app, users_collection);
+    require('./routes/users_route')(app, db);
 
     app.listen(port, ()=>{
         console.log("Server started at http://localhost:3001");
@@ -75,7 +75,7 @@ mongo.connect(function(err, client){
     let ctrlcPressed = 0
     async function onInterrupt() {
         if(ctrlcPressed == 0) {
-            console.log('Closing connection...');
+            console.log('\n\nClosing connection...');
             
             clients_data = await getAllDocuments(clients_collection);
             trainer_data = await getAllDocuments(trainer_collection);
