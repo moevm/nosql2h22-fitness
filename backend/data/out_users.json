@@ -1,1 +1,44 @@
-[{"_id":"63851f7a47e30d72b4e09fa4","FIO":"Admin","email":"admin","telephone":"89212345678","pwd":"admin","type":"admin"},{"_id":"63851f7a47e30d72b4e09fa5","FIO":"Коренева Оксана Семеновна","email":"oxi1970@mail.ru","telephone":"89214345678","pwd":"oxana1970","type":"trainer"},{"_id":"63851f7a47e30d72b4e09fa6","FIO":"Попков Дмитрий Сергеевич","email":"dimon_1996@yandex.ru","telephone":"83687564567","pwd":"123456789","type":"trainer"},{"_id":"63851f7a47e30d72b4e09fa7","FIO":"Атаманов Сергей Сергеевич","email":"pivozavr2022@yandex.ru","telephone":"83687564567","pwd":"987654321","type":"client"},{"_id":"63851f7a47e30d72b4e09fa8","FIO":"Паутова Юлия Владимировна","email":"yula2019@gmail.com","telephone":"83687564567","pwd":"trololoshka","type":"client"},{"_id":"63851f7a47e30d72b4e09fa9","FIO":"Рослова Лариса Сергеевна","email":"orfei2011@mail.ru","telephone":"83687564567","pwd":"roslova123","type":"admin"}]
+[
+    {
+        "FIO": "Admin", 
+        "email": "admin", 
+        "telephone": "89212345678", 
+        "pwd": "admin",
+        "type": "admin"
+    },
+    {
+        "FIO": "Коренева Оксана Семеновна", 
+        "email": "oxi1970@mail.ru", 
+        "telephone": "89214345678", 
+        "pwd": "oxana1970",
+        "type": "trainer"
+    },
+    {
+        "FIO": "Попков Дмитрий Сергеевич", 
+        "email": "dimon_1996@yandex.ru", 
+        "telephone": "83687564567",
+        "pwd": "123456789",
+        "type": "trainer"
+    },
+    {
+        "FIO": "Атаманов Сергей Сергеевич", 
+        "email": "pivozavr2022@yandex.ru", 
+        "telephone": "83687564567",
+        "pwd": "987654321",
+        "type": "client"
+    },
+    {
+        "FIO": "Паутова Юлия Владимировна", 
+        "email": "yula2019@gmail.com", 
+        "telephone": "83687564567",
+        "pwd": "trololoshka",
+        "type": "client"
+    },
+    {
+        "FIO": "Рослова Лариса Сергеевна", 
+        "email": "orfei2011@mail.ru", 
+        "telephone": "83687564567",
+        "pwd": "roslova123",
+        "type": "admin"
+    }
+]

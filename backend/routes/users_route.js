@@ -34,7 +34,32 @@ module.exports = function(app, db) {
             });
         }
         res.send("New user is created");
-      });
+    });
+
+    // Вход пользователя
+    app.post('/login', (req, res) => {
+        const note = {email: req.body.email, pwd: req.body.pwd};
+        users_collection.findOne(note, async (err, result)=>{
+            if (err) { 
+                res.send({ 'error': 'Такого пользователя не зарегистрированои либо введены неверные данные.' }); 
+            }else{
+                if(result == undefined){
+                    res.send("Такого пользователя не зарегистрированои либо введены неверные данные.")
+                }else if(result.type == 'admin'){
+                    res.send(result)
+                }else if(result.type == 'client'){
+                    let tmp = await clients_collection.findOne({FIO: result.FIO})
+                    res.send(tmp);
+                }else{
+                    let tmp = await trainer_collection.findOne({FIO: result.FIO})
+                    res.send(tmp);
+                }
+            }
+        });
+
+    });
+
+    
 
     // Получение документа по айди
     app.get('/users/:id', (req, res) => {

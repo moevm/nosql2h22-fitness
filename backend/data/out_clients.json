@@ -1,1 +1,22 @@
-[{"_id":"63851f7a47e30d72b4e09f9f","FIO":"Рослова Лариса Сергеевна","email":"orfei2011@mail.ru","telephone":"83687564567","programm":"-","trainer":"Попков Дмитрий Сергеевич"},{"_id":"63851f7a47e30d72b4e09fa0","FIO":"Атаманов Сергей Сергеевич","email":"pivozavr2022@yandex.ru","telephone":"83687564567","programm":"-","trainer":"Коренева Оксана Семеновна"},{"_id":"63851f7a47e30d72b4e09fa1","FIO":"Паутова Юлия Владимировна","email":"yula2019@gmail.com","telephone":"83687564567","programm":"-","trainer":"Коренева Оксана Семеновна"}]
+[
+    {   "FIO": "Рослова Лариса Сергеевна", 
+        "email": "orfei2011@mail.ru", 
+        "telephone": "83687564567",
+        "programm": "-",
+        "trainer": "Попков Дмитрий Сергеевич"
+    },
+    {
+        "FIO": "Атаманов Сергей Сергеевич", 
+        "email": "pivozavr2022@yandex.ru", 
+        "telephone": "83687564567",
+        "programm": "-",
+        "trainer": "Коренева Оксана Семеновна"
+    },
+    {
+        "FIO": "Паутова Юлия Владимировна", 
+        "email": "yula2019@gmail.com", 
+        "telephone": "83687564567",
+        "programm": "-",
+        "trainer": "Коренева Оксана Семеновна"
+    }
+]
