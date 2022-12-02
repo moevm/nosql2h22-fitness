@@ -34,6 +34,11 @@
     background-color: #eee;
 }
 
+.timetable_box{
+    display: flex;
+    justify-content: space-between;
+}
+
 .table_box table{
     width: 100%;
     table-layout: fixed;
@@ -50,4 +55,105 @@
 
 .table_box td{
     border: 1px solid #d2d2d2;
+    font-size: 16px;
+    padding: 8px;
+}
+
+.table_box .time_table{
+    width: 70%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid #d2d2d2;
+}
+.time_table th {
+	overflow:hidden;
+}
+.time_table th:nth-of-type(1) {
+	width:220px;
+}
+
+.cell_filter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter_FIO {
+    width: auto;
+    float: right;
+    position: relative;
+    margin-left: 10px;
+}
+.filter_FIO:after {content:""; clear:both; display:table}
+
+.filter_FIO input {
+  width: 250px;
+  height: 42px;
+  padding-left: 15px;
+  border-radius: 42px;
+  border: 2px solid #324b4e;
+  background: #fff;
+  outline: none;
+  transition: .3s linear;
+}
+.filter_FIO input:focus {
+  width: 300px;
+}
+.filter_FIO button {
+  width: 42px;
+  height: 42px;
+  background: none;
+  border: none;
+  position: absolute;
+  right: 0;
+}
+.filter_FIO button:before{
+  content: "\f002";
+  font-family: FontAwesome;
+  color: #324b4e;
+}
+
+.filter_Time{
+    position: relative;
+    margin-left: 10px;
+    width: 135px;
+    height: 42px;
+    padding-left: 15px;
+    border-radius: 42px;
+    border: 2px solid #324b4e;
+    background: #fff;
+}
+.filter_Time input {
+    height: 38px;
+    position: absolute;
+    left: 20px;
+    border-right: 1px solid #d2d2d2;
+}
+.filter_Time button {
+    width: 42px;
+    height: 42px;
+    background: none;
+    border: none;
+    position: absolute;
+    right: 0;
+}
+.filter_Time button:before{
+    content: "\f002";
+    font-family: FontAwesome;
+    color: #324b4e;
+}
+
+.calendar-container{
+    width: 24%;
+    font-size: 18px;
+}
+
+.react-calendar{
+    border-radius: 5px;
+}
+.react-calendar__navigation{
+    background-color: #eeeded;
+}
+.react-calendar__navigation__label{
+    font-size: 18px;
 }

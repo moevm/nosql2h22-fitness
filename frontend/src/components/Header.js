@@ -18,7 +18,7 @@ function Header() {
                 <button id='login_btn' onClick={() => openPage('/login')}>ВОЙТИ</button>
             );
         else{
-            if(localStorage.getItem('autoriz') === 'admin'){
+            if(sessionStorage.getItem('autoriz') === 'admin'){
                 return(
                     <div className='PA_box'>
                         <p>Администратор</p>
