@@ -1,16 +1,29 @@
 [
 {   "FIO": "Рослова Лариса Сергеевна", 
     "email": "orfei2011@mail.ru", 
-    "telephone": "83687564567"
+    "telephone": "83687564567",
+    "programm":"-",
+    "trainer":"Попков Дмитрий Сергеевич"
 },
 {
     "FIO": "Атаманов Сергей Сергеевич", 
     "email": "pivozavr2022@yandex.ru", 
-    "telephone": "83687564567"
+    "telephone": "83687564567",
+    "programm":"-",
+    "trainer":"Коренева Оксана Семеновна"
 },
 {
     "FIO": "Паутова Юлия Владимировна", 
     "email": "yula2019@gmail.com", 
-    "telephone": "83687564567"
+    "telephone": "83687564567",
+    "programm":"-",
+    "trainer":"Коренева Оксана Семеновна"
+},
+{
+    "FIO": "Силкин Владислав Владимирович", 
+    "email": "vlados12345@gmail.com", 
+    "telephone": "83687564567",
+    "programm":"-",
+    "trainer":"По абонементу"
 }
 ]
