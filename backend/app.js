@@ -32,15 +32,18 @@ mongo.connect(function(err, client){
     const db = client.db("fitnessDB");
     const clients_collection = db.collection('clients');
     const trainer_collection = db.collection('trainer');
-    const users_collection = db.collection('users')
+    const users_collection = db.collection('users');
+    const timetable_collection = db.collection('timetable')
 
     const data_clients = fs.readFileSync('./data/out_clients.json');
     const data_trainer = fs.readFileSync('./data/out_trainer.json');
     const data_users = fs.readFileSync('./data/out_users.json');
+    const data_timetable = fs.readFileSync('./data/out_timetable.json');
     
     const docs_clients = JSON.parse(data_clients.toString());
     const docs_trainer = JSON.parse(data_trainer.toString());
     const docs_users = JSON.parse(data_users.toString());
+    const docs_timetable = JSON.parse(data_timetable.toString());
     
     clients_collection.insertMany(docs_clients, function(err, result) {
             if (err) throw err;
@@ -54,10 +57,15 @@ mongo.connect(function(err, client){
         if (err) throw err;
         console.log('Inserted docs_users:', result.insertedCount);
     });
+    timetable_collection.insertMany(docs_timetable, function(err, result) {
+        if (err) throw err;
+        console.log('Inserted docs_timetable:', result.insertedCount);
+    });
 
     require('./routes/client_route')(app, db);
     require('./routes/trainer_route')(app, trainer_collection);
     require('./routes/users_route')(app, db);
+    require('./routes/timetable_route')(app, timetable_collection);
 
     app.listen(port, ()=>{
         console.log("Server started at http://localhost:3001");
@@ -80,10 +88,12 @@ mongo.connect(function(err, client){
             clients_data = await getAllDocuments(clients_collection);
             trainer_data = await getAllDocuments(trainer_collection);
             users_data = await getAllDocuments(users_collection);
+            timetable_data = await getAllDocuments(timetable_collection);
             
             await clients_collection.deleteMany({});
             await trainer_collection.deleteMany({});
             await users_collection.deleteMany({});
+            await timetable_collection.deleteMany({});
             
             fs.writeFileSync('./data/out_clients.json', JSON.stringify(clients_data));
             console.log('Done writing to clients file.');
@@ -91,6 +101,8 @@ mongo.connect(function(err, client){
             console.log('Done writing to trainer file.');
             fs.writeFileSync('./data/out_users.json', JSON.stringify(users_data));
             console.log('Done writing to users file.');
+            fs.writeFileSync('./data/out_timetable.json', JSON.stringify(timetable_data));
+            console.log('Done writing to timetable file.');
             
             await client.close()
         }

@@ -33,7 +33,7 @@ module.exports = function(app, db) {
     app.get('/clients', (req, res) => {
         async function getAllDocuments() {
             try {
-                const tmp = await users_collection.find().toArray();
+                const tmp = await clients_collection.find().toArray();
                 res.send(tmp)
             }catch(err) {
                 console.log(err);

@@ -40,5 +40,12 @@
     "telephone": "83687564567",
     "pwd": "roslova123",
     "type": "admin"
+},
+{
+    "FIO": "Силкин Владислав Владимирович", 
+    "email": "vlados12345@gmail.com", 
+    "telephone": "83687564567",
+    "pwd": "vlados",
+    "type": "client"
 }
 ]
