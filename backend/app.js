@@ -104,6 +104,22 @@ mongo.connect(function(err, client){
             res.send("Файл загружен");
     });
 
+    app.post("/download", function (req, res, next) {
+        let collection_name = req.body.select;
+        if(collection_name == 'clients'){
+            exportFile(clients_collection, collection_name)
+        }else if(collection_name == 'timetable'){
+            exportFile(timetable_collection, collection_name)
+        }else if(collection_name == 'trainer'){
+            exportFile(trainer_collection, collection_name)
+        }else if(collection_name == 'users'){
+            exportFile(users_collection, collection_name)
+        }else{
+            res.send('Имя коллекции некорректное')
+        }
+        res.download(`./data/out_${collection_name}.json`);
+    });
+
     app.listen(port, ()=>{
         console.log("Server started at http://localhost:3001");
     });  
@@ -115,6 +131,12 @@ mongo.connect(function(err, client){
         }catch(err) {
             console.log(err);
         }
+    }
+    
+    async function exportFile(collection, collection_name){
+        data = await getAllDocuments(collection);
+        await fs.writeFileSync(`./data/out_${collection_name}.json`, JSON.stringify(data));
+        console.log('Done writing to export file.');
     }
 
     let ctrlcPressed = 0
