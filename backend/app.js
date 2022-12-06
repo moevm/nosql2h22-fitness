@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const jsonParser = express.json();
 const port = 3001;
 
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Обработчик перед отправкой ответа клиенту.
