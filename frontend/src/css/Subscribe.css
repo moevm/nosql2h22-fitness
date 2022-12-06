@@ -1,0 +1,26 @@
+.subscribe{
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #edf0f4;
+    line-height: 40px;
+    margin-top: 50px;    
+}
+
+.subscribe .title{
+    font-size: 26px;
+    font-weight: bold;
+    color: #3b4754;
+}
+
+#sing_up{
+    width: 10%;
+    height: 40px; 
+    background-color: #29323d;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    border-radius: 2px;
+}
