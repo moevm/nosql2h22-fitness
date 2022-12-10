@@ -1,6 +1,7 @@
 import '../css/reset.css'
 import '../css/Header.css';
 import logo from '../img/logo.png';
+import icon from '../img/icons8.png';
 
 import { useNavigate } from "react-router-dom";
 
@@ -28,9 +29,9 @@ function Header() {
             }
             else{
                 return(
-                    <div>
-                        <button>ув</button>
-                        <button>ЛК</button>
+                    <div className='PA_box'>
+                        <img id='PA_notice' src={icon} alt='notice'/>
+                        <button id='PA_btn' onClick={() => openPage('/user')}>ЛК</button>
                     </div>
                 );
             }
