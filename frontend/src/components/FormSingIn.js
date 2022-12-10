@@ -23,6 +23,9 @@ export default function FormSingIn(){
         if(login.value === 'admin' && pass.value === 'admin01'){
             navigate('/user/admin');
         }
+        else{
+            navigate('/user');
+        }
         sessionStorage.setItem('autoriz', login.value);
     };
 
