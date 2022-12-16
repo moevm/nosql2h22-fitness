@@ -73,7 +73,7 @@
 	overflow:hidden;
 }
 .time_table th:nth-of-type(1) {
-	width:220px;
+	width:250px;
 }
 .no_event{
     text-align: center;
@@ -99,6 +99,7 @@
   width: 250px;
   height: 42px;
   padding-left: 15px;
+  padding-right: 50px;
   border-radius: 42px;
   border: 2px solid #324b4e;
   background: #fff;
@@ -121,11 +122,24 @@
   font-family: FontAwesome;
   color: #324b4e;
 }
+.filter_FIO .clear_btn{
+    width: 42px;
+    height: 42px;
+    background: none;
+    border: none;
+    position: absolute;
+    right: 20px;
+}
+.filter_FIO .clear_btn:before{
+    content: "\2716";
+    font-family: FontAwesome;
+    color: #324b4e;
+}
 
 .filter_Time{
     position: relative;
     margin-left: 10px;
-    width: 135px;
+    width: 150px;
     height: 42px;
     padding-left: 15px;
     border-radius: 42px;
@@ -148,6 +162,19 @@
 }
 .filter_Time button:before{
     content: "\f002";
+    font-family: FontAwesome;
+    color: #324b4e;
+}
+.filter_Time .clear_btn{
+    width: 42px;
+    height: 42px;
+    background: none;
+    border: none;
+    position: absolute;
+    right: 20px;
+}
+.filter_Time .clear_btn:before{
+    content: "\2716";
     font-family: FontAwesome;
     color: #324b4e;
 }

@@ -33,7 +33,22 @@ export default function ClientsTrainersTable(props){
             .catch(err => {
                 console.log('error filter', err);
             });
+        // setFilterValue('');
+    };
+
+    const clearFilter = (e) => {
+        e.stopPropagation();
         setFilterValue('');
+        axios
+            .get(`/${props.name_DB}`)
+            .then(res => {
+                console.log(res);
+                setData(res.data);
+            })
+            .catch(err => {
+                console.log('error filter', err);
+            });
+        
     };
 
     return(
@@ -45,6 +60,7 @@ export default function ClientsTrainersTable(props){
                             ФИО
                             <div className="filter_FIO">
                                 <input type='text' onChange={ e => handleChange(e) } value={filterValue}></input>
+                                <button className="clear_btn" onClick={e => clearFilter(e)}/>
                                 <button onClick={ e => handleClick(e) }/>
                             </div>
                         </div>
