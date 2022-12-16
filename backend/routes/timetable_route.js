@@ -13,46 +13,44 @@ module.exports = function(app, collection) {
             try {
                 let arr = [];
                 const tmp = await collection.findOne({date: date});
-                for (let i = 0; i < tmp.event_note.length; i++) { 
-                    if(time != ""){
-                        if(tmp.event_note[i].time == time){
-                            if(trainer!=""){
-                                if(tmp.event_note[i].trainer == trainer){
-                                    if(client!=""){
-                                        if(tmp.event_note[i].listOfEnrolled.includes(client)) {
+                if(tmp){
+                    for (let i = 0; i < tmp.event_note.length; i++) { 
+                        if(time != ""){
+                            if(tmp.event_note[i].time == time){
+                                if(trainer!=""){
+                                    if(tmp.event_note[i].trainer == trainer){
+                                        if(client!=""){
+                                            if(tmp.event_note[i].listOfEnrolled.includes(client)) {
+                                                arr.push(tmp.event_note[i]);
+                                            }   
+                                        }else{
                                             arr.push(tmp.event_note[i]);
-                                        }   
-                                    }else{
-                                        arr.push(tmp.event_note[i]);
+                                        }
                                     }
-                                }
-                            }else{
-                                arr.push(tmp.event_note[i]);
-                            }   
-                        }
-                    }else if(trainer!=""){
-                        if(tmp.event_note[i].trainer == trainer){
-                            if(client!=""){
-                                if(tmp.event_note[i].listOfEnrolled.includes(client)) {
+                                }else{
                                     arr.push(tmp.event_note[i]);
                                 }   
-                            }else{
-                                arr.push(tmp.event_note[i]);
                             }
+                        }else if(trainer!=""){
+                            if(tmp.event_note[i].trainer == trainer){
+                                if(client!=""){
+                                    if(tmp.event_note[i].listOfEnrolled.includes(client)) {
+                                        arr.push(tmp.event_note[i]);
+                                    }   
+                                }else{
+                                    arr.push(tmp.event_note[i]);
+                                }
+                            }
+                        }else if(client!=""){
+                            if(tmp.event_note[i].listOfEnrolled.includes(client)) {
+                                arr.push(tmp.event_note[i]);
+                            }   
+                        }else if(client=="" && trainer=="" && time==""){
+                            res.send(tmp.event_note)
                         }
-                    }else if(client!=""){
-                        if(tmp.event_note[i].listOfEnrolled.includes(client)) {
-                            arr.push(tmp.event_note[i]);
-                        }   
-                    }else if(client=="" && trainer=="" && time==""){
-                        res.send(tmp.event_note)
                     }
                 }
-                if(arr.length == 0){
-                    res.send("Не найдено такой записи");
-                }else{
-                    res.send(arr);
-                }
+                res.send(arr);
             }catch(err) {
                 console.log(err);
             }

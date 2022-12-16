@@ -4,7 +4,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 export default function TimeTable(){
-    const [data, setData] = useState({});
+    const [data, setData] = useState([]);
     const [date, setDate] = useState(new Date());
     const [filterValueTime, setFilterValueTime] = useState('');
     const [filterValueTrainer, setFilterValueTrainer] = useState('');
@@ -14,7 +14,7 @@ export default function TimeTable(){
         axios
             .post('/timetable/filter', {time: '', date: date.toISOString().slice(0,10), trainer: '', client: ''})
             .then(res => {
-                // console.log(res);
+                console.log(res.data);
                 setData(res.data);
             })
             .catch(err => {
