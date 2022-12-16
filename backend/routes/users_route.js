@@ -33,7 +33,10 @@ module.exports = function(app, db) {
                   }
             });
         }
-        res.send("New user is created");
+        users_collection.findOne({FIO: req.body.fio}, async (err, result)=>{
+            await res.send(result._id);
+        })
+        // res.send("New user is created");
     });
 
     // Вход пользователя
