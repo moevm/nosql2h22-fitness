@@ -23,7 +23,7 @@ module.exports = function(app, collection) {
         const date = req.body.date;
         const time = req.body.time;
         const trainer = req.body.trainer;
-        console.log(`aaaa2${time}3aaaaa`);
+    
     
         let arr = [client, time, trainer];
         let parametres = 0;
@@ -31,6 +31,7 @@ module.exports = function(app, collection) {
         let trainer_reg;
         let timeOne;
         let timeTwo;
+        let flag = 0;
 
         if(client!=''){
             client_reg = new RegExp(`${client}`, 'i');
@@ -38,12 +39,24 @@ module.exports = function(app, collection) {
         if(trainer!=''){
             trainer_reg = new RegExp(`${trainer}`, 'i');
         }
-        if(time!=" "){
+        if(time != " "){
             let timearr = time.split(' ');
+            // console.log('timearr: '+ timearr);
             if(timearr[1] == ''){
+                // console.log("я тут в сплите 1");
+                flag = 1;
                 timeOne = Date.parse(`${date}T${timearr[0]}:00Z`);
-                timeTwo = Date.parse(`${date}T${timearr[0]}:00Z`);
-            }else{
+                // timeTwo = Date.parse(`${date}T${timearr[0]}:00Z`);
+            }
+            if(timearr[0] == ''){
+                // console.log("я тут в сплите 2");
+                flag = 2;
+                // timeOne = Date.parse(`${date}T${timearr[1]}:00Z`);
+                timeTwo = Date.parse(`${date}T${timearr[1]}:00Z`);
+            }
+            if(timearr[0] != '' && timearr[1] != ''){
+                // console.log("я тут в сплите 3");
+                flag = 3;
                 timeOne = Date.parse(`${date}T${timearr[0]}:00Z`);
                 timeTwo = Date.parse(`${date}T${timearr[1]}:00Z`);
             }
@@ -63,25 +76,53 @@ module.exports = function(app, collection) {
             filterOnlyDate();
         }
         if(parametres == 2){
+            (flag < 3) ? filterOnlyTwoT() : filterOnlyTwo();
             console.log("filter 2 param");
-
-            filterOnlyTwo();
+            
         }
         if(parametres == 1){
             console.log("filter 1 param");
-            filterOnlyOne();
+            (flag < 3) ? filterOnlyOneT() : filterOnlyOne();
         }
         if(parametres == 3){
             console.log("filter 3 param");
-            filterAll();
+            (flag < 3) ? filterAllT() : filterAll();
         }
 
         async function filterOnlyTwo() {
+            // console.log("я тут, флаг 3");
             const tmp = await collection.find({date: date, $or:[{$and:[{listOfEnrolled: client_reg},{time: {$gte : timeOne, $lte: timeTwo}}]},
                                                                 {$and:[{listOfEnrolled: client_reg},{trainer: trainer_reg}]},
                                                                 {$and:[{time: {$gte : timeOne, $lte: timeTwo}},{trainer: trainer_reg}]}
-                                                                ]}).toArray();                                          
+                                                                ]}).toArray();    
+            parseTime(tmp);                                      
             res.send(tmp);
+        }
+        async function filterOnlyTwoT() {
+            if(flag == 2){
+                // console.log("я тут, флаг 2");
+                const tmp = await collection.find({date: date, $or:[{$and:[{listOfEnrolled: client_reg},{time: {$lte: timeTwo}}]},
+                                                                    {$and:[{listOfEnrolled: client_reg},{trainer: trainer_reg}]},
+                                                                    {$and:[{time: {$lte: timeTwo}},{trainer: trainer_reg}]}
+                                                                    ]}).toArray();  
+                parseTime(tmp);                                        
+                res.send(tmp);
+            }
+            if(flag == 1){
+                // console.log("я тут, флаг 1");
+                const tmp = await collection.find({date: date, $or:[{$and:[{listOfEnrolled: client_reg},{time: {$gte : timeOne}}]},
+                                                                    {$and:[{listOfEnrolled: client_reg},{trainer: trainer_reg}]},
+                                                                    {$and:[{time: {$gte : timeOne}},{trainer: trainer_reg}]}
+                                                                    ]}).toArray();  
+                parseTime(tmp);                                        
+                res.send(tmp);
+            }
+            if(flag == 0){
+                // console.log("я тут, флаг 0");
+                const tmp = await collection.find({date: date, $or:[{$and:[{listOfEnrolled: client_reg},{trainer: trainer_reg}]}]}).toArray();
+                parseTime(tmp);                                          
+                res.send(tmp);
+            }
         }
 
         async function filterOnlyDate() {
@@ -95,11 +136,41 @@ module.exports = function(app, collection) {
             parseTime(tmp);                                         
             res.send(tmp);
         }
+        async function filterOnlyOneT() {
+            if(flag == 2){
+                const tmp = await collection.find({date: date, $or:[{listOfEnrolled: client_reg},{time: {$lte: timeTwo}},{trainer: trainer_reg}]}).toArray(); 
+                parseTime(tmp);                                         
+                res.send(tmp);
+            }
+            if(flag == 1){
+                const tmp = await collection.find({date: date, $or:[{listOfEnrolled: client_reg},{time: {$gte : timeOne}},{trainer: trainer_reg}]}).toArray(); 
+                parseTime(tmp);                                         
+                res.send(tmp);
+            }
+            if(flag == 0){
+                const tmp = await collection.find({date: date, $or:[{listOfEnrolled: client_reg},{trainer: trainer_reg}]}).toArray(); 
+                parseTime(tmp);                                         
+                res.send(tmp);
+            }
+            
+        }
 
         async function filterAll() {
             const tmp = await collection.find({date: date, listOfEnrolled: client_reg, time: {$gte : timeOne, $lte: timeTwo}, trainer: trainer_reg}).toArray();                                          
             parseTime(tmp); 
             res.send(tmp);
+        }
+        async function filterAllT() {
+            if(flag == 2){
+                const tmp = await collection.find({date: date, listOfEnrolled: client_reg, time: {$lte: timeTwo}, trainer: trainer_reg}).toArray();                                          
+                parseTime(tmp);                                         
+                res.send(tmp);
+            }
+            if(flag == 1){
+                const tmp = await collection.find({date: date, listOfEnrolled: client_reg, time: {$gte : timeOne}, trainer: trainer_reg}).toArray();                                          
+                parseTime(tmp);                                         
+                res.send(tmp);
+            }
         }
 
         function parseTime(arr){
