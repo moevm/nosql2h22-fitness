@@ -1,1 +1,51 @@
-[{"_id":"639ddef947edd17ac2515218","FIO":"Admin","email":"admin","telephone":"89212345678","pwd":"admin","type":"admin"},{"_id":"639ddef947edd17ac2515219","FIO":"Коренева Оксана Семеновна","email":"oxi1970@mail.ru","telephone":"89214345678","pwd":"oxana1970","type":"trainer"},{"_id":"639ddef947edd17ac251521a","FIO":"Попков Дмитрий Сергеевич","email":"dimon_1996@yandex.ru","telephone":"83687564567","pwd":"123456789","type":"trainer"},{"_id":"639ddef947edd17ac251521b","FIO":"Атаманов Сергей Сергеевич","email":"pivozavr2022@yandex.ru","telephone":"83687564567","pwd":"987654321","type":"client"},{"_id":"639ddef947edd17ac251521c","FIO":"Паутова Юлия Владимировна","email":"yula2019@gmail.com","telephone":"83687564567","pwd":"trololoshka","type":"client"},{"_id":"639ddef947edd17ac251521d","FIO":"Рослова Лариса Сергеевна","email":"orfei2011@mail.ru","telephone":"83687564567","pwd":"roslova123","type":"admin"},{"_id":"639ddef947edd17ac251521e","FIO":"Силкин Владислав Владимирович","email":"vlados12345@gmail.com","telephone":"83687564567","pwd":"vlados","type":"client"}]
+[
+{
+    "FIO": "Admin", 
+    "email": "admin", 
+    "telephone": "89212345678", 
+    "pwd": "admin",
+    "type": "admin"
+},
+{
+    "FIO": "Коренева Оксана Семеновна", 
+    "email": "oxi1970@mail.ru", 
+    "telephone": "89214345678", 
+    "pwd": "oxana1970",
+    "type": "trainer"
+},
+{
+    "FIO": "Попков Дмитрий Сергеевич", 
+    "email": "dimon_1996@yandex.ru", 
+    "telephone": "83687564567",
+    "pwd": "123456789",
+    "type": "trainer"
+},
+{
+    "FIO": "Атаманов Сергей Сергеевич", 
+    "email": "pivozavr2022@yandex.ru", 
+    "telephone": "83687564567",
+    "pwd": "987654321",
+    "type": "client"
+},
+{
+    "FIO": "Паутова Юлия Владимировна", 
+    "email": "yula2019@gmail.com", 
+    "telephone": "83687564567",
+    "pwd": "trololoshka",
+    "type": "client"
+},
+{
+    "FIO": "Рослова Лариса Сергеевна", 
+    "email": "orfei2011@mail.ru", 
+    "telephone": "83687564567",
+    "pwd": "roslova123",
+    "type": "admin"
+},
+{
+    "FIO": "Силкин Владислав Владимирович", 
+    "email": "vlados12345@gmail.com", 
+    "telephone": "83687564567",
+    "pwd": "vlados",
+    "type": "client"
+}
+]

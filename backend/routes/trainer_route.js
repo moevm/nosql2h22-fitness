@@ -40,5 +40,69 @@ module.exports = function(app, collection) {
             }
         }
         getAllDocuments();
-    })
+    });
+
+    app.post('/trainers/filter', (req, res) => {
+        const fio = req.body.fio;
+        const tel = req.body.tel;
+        const email = req.body.email;
+        
+        let arr = [fio, tel, email];
+        let parametres = 0;
+        let fio_reg;
+        let tel_reg;
+        let email_reg;
+        console.log(arr);
+
+
+        if(fio!=''){
+            fio_reg = new RegExp(`${fio}`, 'i');
+        }
+        if(tel!=''){
+            tel_reg = new RegExp(`${tel}`, 'i');
+        }
+        if(email!=''){
+            email_reg = new RegExp(`${email}`, 'i');
+        }
+        
+        for(let i =0; i<arr.length; i++){
+            if(arr[i] != ''){
+                parametres++;
+            }
+        }
+
+        if(parametres == 2){
+            console.log("filter 2 param");
+            filterOnlyTwo();
+        }
+        if(parametres == 1){
+            console.log("filter 1 param");
+            filterOnlyOne();
+            
+        }
+        if(parametres == 3){
+            console.log("filter 3 param");
+            filterAll();
+        }
+
+        async function filterOnlyTwo() {
+            // console.log("я тут, флаг 3");
+            const tmp = await trainers_collection.find({$or:[{$and:[{FIO: fio_reg},{telephone: tel_reg}]},
+                                                            {$and:[{FIO: fio_reg},{email: email_reg}]},
+                                                            {$and:[{telephone: tel_reg},{email: email_reg}]}
+                                                            ]}).toArray();    
+            res.send(tmp);
+        }
+
+        async function filterOnlyOne() {
+            const tmp = await trainers_collection.find({$or:[{FIO: fio_reg},{telephone: tel_reg},{email: email_reg}]}).toArray(); 
+            res.send(tmp);
+        }
+
+        async function filterAll() {
+            const tmp = await trainers_collection.find({FIO: fio_reg, telephone: tel_reg, email: email_reg}).toArray();                                          
+            res.send(tmp);
+        }
+    });
+
 }
