@@ -23,6 +23,7 @@ module.exports = function(app, collection) {
         const date = req.body.date;
         const time = req.body.time;
         const trainer = req.body.trainer;
+        console.log(`aaaa2${time}3aaaaa`);
     
         let arr = [client, time, trainer];
         let parametres = 0;
@@ -37,7 +38,7 @@ module.exports = function(app, collection) {
         if(trainer!=''){
             trainer_reg = new RegExp(`${trainer}`, 'i');
         }
-        if(time!=""){
+        if(time!=" "){
             let timearr = time.split(' ');
             if(timearr[1] == ''){
                 timeOne = Date.parse(`${date}T${timearr[0]}:00Z`);
@@ -51,6 +52,9 @@ module.exports = function(app, collection) {
         for(let i =0; i<arr.length; i++){
             if(arr[i] != ''){
                 parametres++;
+            }
+            if(arr[i]==" "){
+            parametres--;
             }
         }
 
