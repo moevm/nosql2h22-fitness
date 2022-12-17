@@ -3,6 +3,7 @@ const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const fs = require("fs");
 const bodyParser = require('body-parser');
+const { log } = require("console");
 const jsonParser = express.json();
 const port = 3001;
 
@@ -45,6 +46,13 @@ mongo.connect(function(err, client){
     const docs_trainer = JSON.parse(data_trainer.toString());
     const docs_users = JSON.parse(data_users.toString());
     const docs_timetable = JSON.parse(data_timetable.toString());
+    // console.log(docs_timetable);
+    for(let i = 0; i < docs_timetable.length; i++){
+        docs_timetable[i].time = Date.parse(docs_timetable[i].time);
+        // console.log(docs_timetable[i].time);
+    }
+    
+
     
     clients_collection.insertMany(docs_clients, function(err, result) {
             if (err) throw err;
@@ -90,6 +98,10 @@ mongo.connect(function(err, client){
             trainer_data = await getAllDocuments(trainer_collection);
             users_data = await getAllDocuments(users_collection);
             timetable_data = await getAllDocuments(timetable_collection);
+            
+            for(let i = 0; i < timetable_data.length; i++){
+                timetable_data[i].time = new Date(docs_timetable[i].time).toISOString();
+            }
             
             await clients_collection.deleteMany({});
             await trainer_collection.deleteMany({});
