@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 
 export default function ClientsTrainersTable(props){
     const [data, setData] = useState([]);
-    const [filterValue, setFilterValue] = useState('');
+    const [filterValueFIO, setFilterValueFIO] = useState('');
+    const [filterValueTel, setFilterValueTel] = useState('');
+    const [filterValueEmail, setFilterValueEmail] = useState('');
 
     useEffect(()=>{
         axios
@@ -19,13 +21,25 @@ export default function ClientsTrainersTable(props){
 
     const handleChange = (e) => {
         e.stopPropagation();
-        setFilterValue(e.target.value);
+        switch (e.target.name){
+            case 'FIO':
+                setFilterValueFIO(e.target.value);
+                break;
+            case 'Tel':
+                setFilterValueTel(e.target.value);
+                break;
+            case 'Email':
+                setFilterValueEmail(e.target.value);
+                break;
+            default:
+                break;
+        }
     };
 
     const handleClick = (e) => {
         e.stopPropagation();
         axios
-            .get(`/${props.name_DB}/filter/${filterValue}`)
+            .get(`/${props.name_DB}/filter/${filterValueFIO}`)
             .then(res => {
                 console.log(res);
                 setData(res.data);
@@ -33,12 +47,23 @@ export default function ClientsTrainersTable(props){
             .catch(err => {
                 console.log('error filter', err);
             });
-        // setFilterValue('');
     };
 
     const clearFilter = (e) => {
         e.stopPropagation();
-        setFilterValue('');
+        switch (e.target.name){
+            case 'FIO':
+                setFilterValueFIO('');
+                break;
+            case 'Tel':
+                setFilterValueTel('');
+                break;
+            case 'Email':
+                setFilterValueEmail('');
+                break;
+            default:
+                break;
+        }
         axios
             .get(`/${props.name_DB}`)
             .then(res => {
@@ -58,15 +83,33 @@ export default function ClientsTrainersTable(props){
                     <th>
                         <div className="cell_filter">
                             ФИО
-                            <div className="filter_FIO">
-                                <input type='text' onChange={ e => handleChange(e) } value={filterValue}></input>
-                                <button className="clear_btn" onClick={e => clearFilter(e)}/>
+                            <div className="filter_text">
+                                <input type='text' name="FIO" onChange={ e => handleChange(e) } value={filterValueFIO}></input>
+                                <button className="clear_btn" name="FIO" onClick={e => clearFilter(e)}/>
                                 <button onClick={ e => handleClick(e) }/>
                             </div>
                         </div>
                     </th>
-                    <th>Номер телефона</th>
-                    <th>Почта</th>
+                    <th>
+                        <div className="cell_filter">
+                            Номер телефона
+                            <div className="filter_text">
+                                <input type='text' name="Tel" onChange={ e => handleChange(e) } value={filterValueTel}></input>
+                                <button className="clear_btn" name="Tel" onClick={e => clearFilter(e)}/>
+                                <button onClick={ e => handleClick(e) }/>
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                    <div className="cell_filter">
+                            Почта
+                            <div className="filter_text">
+                                <input type='text' name="Email" onChange={ e => handleChange(e) } value={filterValueEmail}></input>
+                                <button className="clear_btn" name="Email" onClick={e => clearFilter(e)}/>
+                                <button onClick={ e => handleClick(e) }/>
+                            </div>
+                        </div>
+                    </th>
                 </tr>
             </thead>
             <tbody>

@@ -6,7 +6,8 @@ import 'react-calendar/dist/Calendar.css';
 export default function TimeTable(){
     const [data, setData] = useState([]);
     const [date, setDate] = useState(new Date());
-    const [filterValueTime, setFilterValueTime] = useState('');
+    const [filterValueTimeFrom, setFilterValueTimeFrom] = useState('');
+    const [filterValueTimeTo, setFilterValueTimeTo] = useState('');
     const [filterValueTrainer, setFilterValueTrainer] = useState('');
     const [filterValueClient, setFilterValueClient] = useState('');
 
@@ -25,8 +26,11 @@ export default function TimeTable(){
     const handleChange = (e) => {
         e.stopPropagation();
         switch (e.target.name){
-            case 'Time':
-                setFilterValueTime(e.target.value);
+            case 'TimeFrom':
+                setFilterValueTimeFrom(e.target.value);
+                break;
+            case 'TimeTo':
+                setFilterValueTimeTo(e.target.value);
                 break;
             case 'Trainer':
                 setFilterValueTrainer(e.target.value);
@@ -37,14 +41,13 @@ export default function TimeTable(){
             default:
                 break;
         }
-        
     };
 
     const handleClick = (e) => {
         e.stopPropagation();
         console.log(date.toISOString().slice(0,10));
         axios
-            .post('/timetable/filter', {time: filterValueTime, date: date.toISOString().slice(0,10), trainer: filterValueTrainer, client: filterValueClient})
+            .post('/timetable/filter', {time: [filterValueTimeFrom,filterValueTimeTo], date: date.toISOString().slice(0,10), trainer: filterValueTrainer, client: filterValueClient})
             .then(res => {
                 // console.log(res);
                 setData(res.data);
@@ -61,7 +64,7 @@ export default function TimeTable(){
         setDate(valDate);
         // console.log(valDate.toISOString().split('T')[0])
         axios
-            .post('/timetable/filter', {time: filterValueTime, date: valDate.toISOString().slice(0,10), trainer: filterValueTrainer, client: filterValueClient})
+            .post('/timetable/filter', {time: [filterValueTimeFrom,filterValueTimeTo], date: valDate.toISOString().slice(0,10), trainer: filterValueTrainer, client: filterValueClient})
             .then(res => {
                 // console.log(res);
                 setData(res.data);
@@ -73,13 +76,14 @@ export default function TimeTable(){
 
     const clearFilter = (e) => {
         e.stopPropagation();
-        let curFilterValueTime = filterValueTime;
+        let curFilterValueTime = [filterValueTimeFrom, filterValueTimeTo];
         let curFilterValueTrainer = filterValueTrainer;
         let curFilterValueClient = filterValueClient;
         switch (e.target.name){
             case 'Time':
-                setFilterValueTime('');
-                curFilterValueTime = '';
+                setFilterValueTimeFrom('');
+                setFilterValueTimeTo('');
+                curFilterValueTime = [];
                 break;
             case 'Trainer':
                 setFilterValueTrainer('');
@@ -142,18 +146,29 @@ export default function TimeTable(){
                         <th>
                             <div className="cell_filter">
                                 Время
-                                <div className="filter_Time">
-                                    <input type='time' onChange={ e => handleChange(e) } name='Time' value={filterValueTime}></input>
-                                    <button className="clear_btn" name='Time' onClick={e => clearFilter(e)}/>
-                                    <button onClick={ e => handleClick(e) }/>
+                                <div className="filter_time_interval">
+                                    <div className="filter_time_input">
+                                        <p>От</p>
+                                        <div className="filter_Time">    
+                                            <input type='time' onChange={ e => handleChange(e) } name='TimeFrom' value={filterValueTimeFrom}/>    
+                                        </div>
+                                        <p>До</p>
+                                        <div className="filter_Time">    
+                                            <input type='time' onChange={ e => handleChange(e) } name='TimeTo' value={filterValueTimeTo}/>    
+                                        </div>
+                                    </div>
+                                    <div className="filter_time_btn">
+                                        <button className="clear_btn" name='Time' onClick={e => clearFilter(e)}/>
+                                        <button onClick={ e => handleClick(e) }/>
+                                    </div>
                                 </div>
                             </div>
                         </th>
                         <th>
                             <div className="cell_filter">
                                 Тренер
-                                <div className="filter_FIO">
-                                    <input type='text' onChange={ e => handleChange(e) } name='Trainer' value={filterValueTrainer}></input>
+                                <div className="filter_text">
+                                    <input type='text' onChange={ e => handleChange(e) } name='Trainer' value={filterValueTrainer}/>
                                     <button className="clear_btn" name='Trainer' onClick={e => clearFilter(e)}/>
                                     <button onClick={ e => handleClick(e) }/>
                                 </div>
@@ -162,8 +177,8 @@ export default function TimeTable(){
                         <th>
                             <div className="cell_filter">
                                 Список записавшихся
-                                <div className="filter_FIO">
-                                    <input type='text' onChange={ e => handleChange(e) } name='Client' value={filterValueClient}></input>
+                                <div className="filter_text">
+                                    <input type='text' onChange={ e => handleChange(e) } name='Client' value={filterValueClient}/>
                                     <button className="clear_btn" name='Client' onClick={e => clearFilter(e)}/>
                                     <button onClick={ e => handleClick(e) }/>
                                 </div>
