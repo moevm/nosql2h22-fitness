@@ -52,8 +52,6 @@ module.exports = function(app, collection) {
         let fio_reg;
         let tel_reg;
         let email_reg;
-        console.log(arr);
-
 
         if(fio!=''){
             fio_reg = new RegExp(`${fio}`, 'i');
@@ -84,10 +82,14 @@ module.exports = function(app, collection) {
             console.log("filter 3 param");
             filterAll();
         }
+        if(parametres == 0){
+            console.log("filter 0 param");
+            getAllDocuments();
+        }
 
         async function filterOnlyTwo() {
             // console.log("я тут, флаг 3");
-            const tmp = await trainers_collection.find({$or:[{$and:[{FIO: fio_reg},{telephone: tel_reg}]},
+            const tmp = await collection.find({$or:[{$and:[{FIO: fio_reg},{telephone: tel_reg}]},
                                                             {$and:[{FIO: fio_reg},{email: email_reg}]},
                                                             {$and:[{telephone: tel_reg},{email: email_reg}]}
                                                             ]}).toArray();    
@@ -95,13 +97,21 @@ module.exports = function(app, collection) {
         }
 
         async function filterOnlyOne() {
-            const tmp = await trainers_collection.find({$or:[{FIO: fio_reg},{telephone: tel_reg},{email: email_reg}]}).toArray(); 
+            const tmp = await collection.find({$or:[{FIO: fio_reg},{telephone: tel_reg},{email: email_reg}]}).toArray(); 
             res.send(tmp);
         }
 
         async function filterAll() {
-            const tmp = await trainers_collection.find({FIO: fio_reg, telephone: tel_reg, email: email_reg}).toArray();                                          
+            const tmp = await collection.find({FIO: fio_reg, telephone: tel_reg, email: email_reg}).toArray();                                          
             res.send(tmp);
+        }
+        async function getAllDocuments() {
+            try {
+                const tmp = await collection.find().toArray();
+                res.send(tmp)
+            }catch(err) {
+                console.log(err);
+            }
         }
     });
 

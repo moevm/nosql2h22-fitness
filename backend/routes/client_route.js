@@ -66,8 +66,6 @@ module.exports = function(app, db) {
         let fio_reg;
         let tel_reg;
         let email_reg;
-        console.log(arr);
-
 
         if(fio!=''){
             fio_reg = new RegExp(`${fio}`, 'i');
@@ -98,6 +96,9 @@ module.exports = function(app, db) {
             console.log("filter 3 param");
             filterAll();
         }
+        if(parametres == 0){
+            getAllDocuments();
+        }
 
         async function filterOnlyTwo() {
             // console.log("я тут, флаг 3");
@@ -116,6 +117,14 @@ module.exports = function(app, db) {
         async function filterAll() {
             const tmp = await clients_collection.find({FIO: fio_reg, telephone: tel_reg, email: email_reg}).toArray();                                          
             res.send(tmp);
+        }
+        async function getAllDocuments() {
+            try {
+                const tmp = await clients_collection.find().toArray();
+                res.send(tmp)
+            }catch(err) {
+                console.log(err);
+            }
         }
     });
 
