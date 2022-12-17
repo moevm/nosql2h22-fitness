@@ -28,22 +28,21 @@ export default function FormSingUp(){
         }
     };
 
-    const handleSubmit = () => {
+    const handleClick = () => {
         axios
             .post('/registration', {fio: fio.value, email: email.value, telephone: tel.val, pwd: pass.value, type: 'client'})
             .then(res => {
-                console.log(res);
-                // navigate(`/user`);
-                // sessionStorage.setItem('autoriz', res._id);
+                // console.log(res);
+                navigate(`/user`);
+                sessionStorage.setItem('autoriz', res.data);
             })
             .catch(err => {
                 console.log('err in data', err);
-            });
-            
+            });            
     };
 
     return(
-        <form onSubmit={()=>handleSubmit()}>
+        <div className='form' >
             <div className='items'>
                 <p>ФИО</p>
                 <input id="FIO" type='text' value={fio.value} onChange={handleChange}/>
@@ -61,8 +60,8 @@ export default function FormSingUp(){
                 <input id="password" type='password' value={pass.value} onChange={handleChange}/>
             </div>
             <div>
-                <button id='singUp' type='submit'>Зарегистрироваться</button>
+                <button id='singUp' onClick={()=>handleClick()}>Зарегистрироваться</button>
             </div>
-        </form>
+        </div>
     );
 };
