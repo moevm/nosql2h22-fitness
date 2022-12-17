@@ -47,7 +47,7 @@ export default function TimeTable(){
         e.stopPropagation();
         console.log(date.toISOString().slice(0,10));
         axios
-            .post('/timetable/filter', {time: [filterValueTimeFrom,filterValueTimeTo], date: date.toISOString().slice(0,10), trainer: filterValueTrainer, client: filterValueClient})
+            .post('/timetable/filter', {time: filterValueTimeFrom+' '+filterValueTimeTo, date: date.toISOString().slice(0,10), trainer: filterValueTrainer, client: filterValueClient})
             .then(res => {
                 // console.log(res);
                 setData(res.data);
@@ -64,7 +64,7 @@ export default function TimeTable(){
         setDate(valDate);
         // console.log(valDate.toISOString().split('T')[0])
         axios
-            .post('/timetable/filter', {time: [filterValueTimeFrom,filterValueTimeTo], date: valDate.toISOString().slice(0,10), trainer: filterValueTrainer, client: filterValueClient})
+            .post('/timetable/filter', {time: filterValueTimeFrom+' '+filterValueTimeTo, date: valDate.toISOString().slice(0,10), trainer: filterValueTrainer, client: filterValueClient})
             .then(res => {
                 // console.log(res);
                 setData(res.data);
@@ -76,14 +76,14 @@ export default function TimeTable(){
 
     const clearFilter = (e) => {
         e.stopPropagation();
-        let curFilterValueTime = [filterValueTimeFrom, filterValueTimeTo];
+        let curFilterValueTime = filterValueTimeFrom+' '+filterValueTimeTo;
         let curFilterValueTrainer = filterValueTrainer;
         let curFilterValueClient = filterValueClient;
         switch (e.target.name){
             case 'Time':
                 setFilterValueTimeFrom('');
                 setFilterValueTimeTo('');
-                curFilterValueTime = [];
+                curFilterValueTime = '';
                 break;
             case 'Trainer':
                 setFilterValueTrainer('');
