@@ -39,41 +39,46 @@ export default function ClientsTrainersTable(props){
     const handleClick = (e) => {
         e.stopPropagation();
         axios
-            .get(`/${props.name_DB}/filter/${filterValueFIO}`)
+            .post(`/${props.name_DB}/filter`, {fio: filterValueFIO, tel: filterValueTel, email: filterValueEmail})
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 setData(res.data);
             })
             .catch(err => {
-                console.log('error filter', err);
+                console.log('err in data', err);
             });
     };
 
     const clearFilter = (e) => {
         e.stopPropagation();
+        let curFilterValueFIO = filterValueFIO;
+        let curFilterValueTel = filterValueTel;
+        let curFilterValueEmail = filterValueEmail;
         switch (e.target.name){
             case 'FIO':
                 setFilterValueFIO('');
+                curFilterValueFIO = ''
                 break;
             case 'Tel':
                 setFilterValueTel('');
+                curFilterValueTel = '';
                 break;
             case 'Email':
                 setFilterValueEmail('');
+                curFilterValueEmail = '';
                 break;
             default:
                 break;
         }
         axios
-            .get(`/${props.name_DB}`)
+            .post(`/${props.name_DB}/filter`, {fio: curFilterValueFIO, tel: curFilterValueTel, email: curFilterValueEmail})
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 setData(res.data);
             })
             .catch(err => {
-                console.log('error filter', err);
-            });
-        
+                console.log('err in data', err);
+            });        
     };
 
     return(
