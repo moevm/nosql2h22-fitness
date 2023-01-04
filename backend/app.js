@@ -3,10 +3,12 @@ const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const fs = require("fs");
 const bodyParser = require('body-parser');
+const { log } = require("console");
 const jsonParser = express.json();
 const multer = require('multer');
 const port = 3001;
 
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Обработчик перед отправкой ответа клиенту.
@@ -59,10 +61,34 @@ mongo.connect(function(err, client){
     let path_trainer = './data/out_trainer.json';
     let path_users = './data/out_users.json';
     
-    createData(clients_collection, path_client);
-    createData(timetable_collection, path_timetable);
-    createData(users_collection, path_users);
-    createData(trainer_collection, path_trainer);
+    const docs_clients = JSON.parse(data_clients.toString());
+    const docs_trainer = JSON.parse(data_trainer.toString());
+    const docs_users = JSON.parse(data_users.toString());
+    const docs_timetable = JSON.parse(data_timetable.toString());
+    // console.log(docs_timetable);
+    for(let i = 0; i < docs_timetable.length; i++){
+        docs_timetable[i].time = Date.parse(docs_timetable[i].time);
+        // console.log(docs_timetable[i].time);
+    }
+    
+
+    
+    clients_collection.insertMany(docs_clients, function(err, result) {
+            if (err) throw err;
+            console.log('Inserted docs_clients:', result.insertedCount);
+    });
+    trainer_collection.insertMany(docs_trainer, function(err, result) {
+        if (err) throw err;
+        console.log('Inserted docs_trainer:', result.insertedCount);
+    });
+    users_collection.insertMany(docs_users, function(err, result) {
+        if (err) throw err;
+        console.log('Inserted docs_users:', result.insertedCount);
+    });
+    timetable_collection.insertMany(docs_timetable, function(err, result) {
+        if (err) throw err;
+        console.log('Inserted docs_timetable:', result.insertedCount);
+    });
 
     require('./routes/client_route')(app, db);
     require('./routes/trainer_route')(app, trainer_collection);
@@ -148,6 +174,10 @@ mongo.connect(function(err, client){
             trainer_data = await getAllDocuments(trainer_collection);
             users_data = await getAllDocuments(users_collection);
             timetable_data = await getAllDocuments(timetable_collection);
+            
+            for(let i = 0; i < timetable_data.length; i++){
+                timetable_data[i].time = new Date(docs_timetable[i].time).toISOString();
+            }
             
             await clients_collection.deleteMany({});
             await trainer_collection.deleteMany({});
