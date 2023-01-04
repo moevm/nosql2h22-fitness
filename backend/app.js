@@ -5,6 +5,7 @@ const fs = require("fs");
 const bodyParser = require('body-parser');
 const { log } = require("console");
 const jsonParser = express.json();
+const multer = require('multer');
 const port = 3001;
 
 app.use(bodyParser.json())
@@ -21,13 +22,31 @@ app.use(function(request, response, next){
     // fs.appendFile("server.log", data + "\n", function(){});
     next();
 });
+app.use(express.static(__dirname));
 
 app.get("/", function(request, response){
     response.send("<h1>Главная страница сервера </h1>");
 });
 
+app.use(multer({dest:"uploads"}).single("filedata"));
+
+
 const url = "mongodb://localhost:27017/";
 const mongo = new MongoClient(url);
+
+async function createData(collection, pathToDataFile){
+    data_file = await fs.readFileSync(`${pathToDataFile}`);
+    docs = await JSON.parse(data_file.toString());
+    await collection.insertMany(docs, function(err, result) {
+        if (err) throw err;
+        console.log(`Inserted docs from ${pathToDataFile}:`, result.insertedCount);
+    });
+}
+
+async function deleteData(collection) {
+    await collection.deleteMany({});
+    console.log('Очистка перед новым заполнением коллекции прошла успешно.\n');
+}
 
 mongo.connect(function(err, client){
 
@@ -37,10 +56,10 @@ mongo.connect(function(err, client){
     const users_collection = db.collection('users');
     const timetable_collection = db.collection('timetable')
 
-    const data_clients = fs.readFileSync('./data/out_clients.json');
-    const data_trainer = fs.readFileSync('./data/out_trainer.json');
-    const data_users = fs.readFileSync('./data/out_users.json');
-    const data_timetable = fs.readFileSync('./data/out_timetable.json');
+    let path_client = './data/out_clients.json';
+    let path_timetable = './data/out_timetable.json';
+    let path_trainer = './data/out_trainer.json';
+    let path_users = './data/out_users.json';
     
     const docs_clients = JSON.parse(data_clients.toString());
     const docs_trainer = JSON.parse(data_trainer.toString());
@@ -75,6 +94,57 @@ mongo.connect(function(err, client){
     require('./routes/trainer_route')(app, trainer_collection);
     require('./routes/users_route')(app, db);
     require('./routes/timetable_route')(app, timetable_collection);
+    
+    app.post("/upload", function (req, res, next) {
+        let filedata = req.file;
+        // clients, timetables, trainer, users
+        let collection_name = req.body.select;
+        // console.log(filedata);
+        fs.rename(req.file.path, 'uploads/out_' + collection_name + '.json', function (err) {
+            if (err) throw err;
+             console.log('renamed complete');
+       });
+
+       if(collection_name == 'clients'){
+        deleteData(clients_collection);
+        let path = `./uploads/out_${collection_name}.json`
+        createData(clients_collection, path);
+       }else if(collection_name == 'timetable'){
+        deleteData(timetable_collection);
+        let path = `./uploads/out_${collection_name}.json`
+        createData(timetable_collection, path);
+       }else if(collection_name == 'trainer'){
+        deleteData(trainer_collection);
+        let path = `./uploads/out_${collection_name}.json`
+        createData(trainer_collection, path);
+       }else if(collection_name == 'users'){
+        deleteData(users_collection);
+        let path = `./uploads/out_${collection_name}.json`
+        createData(users_collection, path);
+       }else{
+            res.send('Имя коллекции некорректное')
+       }
+        if(!filedata)
+            res.send("Ошибка при загрузке файла");
+        else
+            res.send("Файл загружен");
+    });
+
+    app.post("/download", function (req, res, next) {
+        let collection_name = req.body.select;
+        if(collection_name == 'clients'){
+            exportFile(clients_collection, collection_name)
+        }else if(collection_name == 'timetable'){
+            exportFile(timetable_collection, collection_name)
+        }else if(collection_name == 'trainer'){
+            exportFile(trainer_collection, collection_name)
+        }else if(collection_name == 'users'){
+            exportFile(users_collection, collection_name)
+        }else{
+            res.send('Имя коллекции некорректное')
+        }
+        res.download(`./data/out_${collection_name}.json`);
+    });
 
     app.listen(port, ()=>{
         console.log("Server started at http://localhost:3001");
@@ -87,6 +157,12 @@ mongo.connect(function(err, client){
         }catch(err) {
             console.log(err);
         }
+    }
+    
+    async function exportFile(collection, collection_name){
+        data = await getAllDocuments(collection);
+        await fs.writeFileSync(`./data/out_${collection_name}.json`, JSON.stringify(data));
+        console.log('Done writing to export file.');
     }
 
     let ctrlcPressed = 0
