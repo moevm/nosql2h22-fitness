@@ -56,11 +56,11 @@ mongo.connect(function(err, client){
     const users_collection = db.collection('users');
     const timetable_collection = db.collection('timetable')
 
-    let path_client = './data/out_clients.json';
-    let path_timetable = './data/out_timetable.json';
-    let path_trainer = './data/out_trainer.json';
-    let path_users = './data/out_users.json';
-    
+    const data_clients = fs.readFileSync('./data/out_clients.json');
+    const data_trainer = fs.readFileSync('./data/out_trainer.json');
+    const data_users = fs.readFileSync('./data/out_users.json');
+    const data_timetable = fs.readFileSync('./data/out_timetable.json');
+
     const docs_clients = JSON.parse(data_clients.toString());
     const docs_trainer = JSON.parse(data_trainer.toString());
     const docs_users = JSON.parse(data_users.toString());
