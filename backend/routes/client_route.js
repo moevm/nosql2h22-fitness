@@ -56,32 +56,76 @@ module.exports = function(app, db) {
         filter()
     });
 
-    // Пагинация таблицы
-    // app.get('/clients/page/:page', (req, res) => {
-    //     let current_page = Number(req.params.page);
+    app.post('/clients/filter', (req, res) => {
+        const fio = req.body.fio;
+        const tel = req.body.tel;
+        const email = req.body.email;
         
-    //     let count_documents = clients_collection.countDocuments();
-    //     console.log(count_documents);
-    //     let count_entrys = 15;
-    //     let count_pages = Math.ceil(count_documents/count_entrys);
-    //     console.log(current_page);
-    //     console.log(count_pages);
-    //     if(Number(current_page) > count_pages+1){
-    //         res.send({'error': "Больше страниц быть не может"})
-    //     }else{
-    //         getPage();
-    //     }
-    //     async function getPage() {
-    //         try {
-    //             const tmp = await clients_collection.find().skip((current_page*count_entrys)-15).limit(15).toArray()
-    //             console.log(tmp);
-    //             res.send(tmp)
-    //         }catch(err) {
-    //             console.log(err);
-    //         }
-    //     }
-    // })
+        let arr = [fio, tel, email];
+        let parametres = 0;
+        let fio_reg;
+        let tel_reg;
+        let email_reg;
 
+        if(fio!=''){
+            fio_reg = new RegExp(`${fio}`, 'i');
+        }
+        if(tel!=''){
+            tel_reg = new RegExp(`${tel}`, 'i');
+        }
+        if(email!=''){
+            email_reg = new RegExp(`${email}`, 'i');
+        }
+        
+        for(let i =0; i<arr.length; i++){
+            if(arr[i] != ''){
+                parametres++;
+            }
+        }
 
+        if(parametres == 2){
+            console.log("filter 2 param");
+            filterOnlyTwo();
+        }
+        if(parametres == 1){
+            console.log("filter 1 param");
+            filterOnlyOne();
+            
+        }
+        if(parametres == 3){
+            console.log("filter 3 param");
+            filterAll();
+        }
+        if(parametres == 0){
+            getAllDocuments();
+        }
+
+        async function filterOnlyTwo() {
+            // console.log("я тут, флаг 3");
+            const tmp = await clients_collection.find({$or:[{$and:[{FIO: fio_reg},{telephone: tel_reg}]},
+                                                            {$and:[{FIO: fio_reg},{email: email_reg}]},
+                                                            {$and:[{telephone: tel_reg},{email: email_reg}]}
+                                                            ]}).toArray();    
+            res.send(tmp);
+        }
+
+        async function filterOnlyOne() {
+            const tmp = await clients_collection.find({$or:[{FIO: fio_reg},{telephone: tel_reg},{email: email_reg}]}).toArray(); 
+            res.send(tmp);
+        }
+
+        async function filterAll() {
+            const tmp = await clients_collection.find({FIO: fio_reg, telephone: tel_reg, email: email_reg}).toArray();                                          
+            res.send(tmp);
+        }
+        async function getAllDocuments() {
+            try {
+                const tmp = await clients_collection.find().toArray();
+                res.send(tmp)
+            }catch(err) {
+                console.log(err);
+            }
+        }
+    });
 
 }

@@ -5,14 +5,16 @@
     "telephone": "89214345678", 
     "listOfClients": [
         {"FIO": "Атаманов Сергей Сергеевич", "email": "pivozavr2022@yandex.ru", "telephone": "83687564567"},
-        {"FIO": "Паутова Юлия Владимировна", "email": "yula2019@gmail.com", "telephone": "83687564567"}]
+        {"FIO": "Паутова Юлия Владимировна", "email": "yula2019@gmail.com", "telephone": "83687564567"},
+        {"FIO": "Воронцова Елизавета Дмитриевна", "email": "lizka@yandex.ru", "telephone": "89219368692"}]
 },
 {
     "FIO": "Попков Дмитрий Сергеевич", 
     "email": "dimon_1996@yandex.ru", 
     "telephone": "83687564567", 
     "listOfClients": [
-        {"FIO": "Рослова Лариса Сергеевна", "email": "orfei2011@mail.ru", "telephone": "83687564567"}]
+        {"FIO": "Рослова Лариса Сергеевна", "email": "orfei2011@mail.ru", "telephone": "83687564567"},
+        {"FIO": "Белобрыкин Никита Борисович", "email": "goodbelyi@gmail.com", "telephone": "95217346546"}]
 }
 
 ]

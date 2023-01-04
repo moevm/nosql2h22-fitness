@@ -61,15 +61,24 @@
 
 .table_box .time_table{
     width: 70%;
+    height: 50px;
     table-layout: fixed;
     border-collapse: collapse;
     border: 1px solid #d2d2d2;
+}
+.time_table td p{
+    line-height: 25px;
 }
 .time_table th {
 	overflow:hidden;
 }
 .time_table th:nth-of-type(1) {
-	width:220px;
+	width:250px;
+}
+.no_event{
+    text-align: center;
+    height: 50px;
+    font-size: 18px;
 }
 
 .cell_filter{
@@ -78,69 +87,98 @@
     justify-content: center;
 }
 
-.filter_FIO {
+.filter_text {
     width: auto;
     float: right;
     position: relative;
     margin-left: 10px;
 }
-.filter_FIO:after {content:""; clear:both; display:table}
+.filter_text:after {content:""; clear:both; display:table}
 
-.filter_FIO input {
+.filter_text input {
   width: 250px;
   height: 42px;
   padding-left: 15px;
+  padding-right: 50px;
   border-radius: 42px;
   border: 2px solid #324b4e;
   background: #fff;
   outline: none;
   transition: .3s linear;
 }
-.filter_FIO input:focus {
+.filter_text input:focus {
   width: 300px;
 }
-.filter_FIO button {
-  width: 42px;
+.filter_text button {
+  width: 30px;
   height: 42px;
   background: none;
   border: none;
   position: absolute;
-  right: 0;
+  right: 5px;
 }
-.filter_FIO button:before{
+.filter_text button:before{
   content: "\f002";
   font-family: FontAwesome;
   color: #324b4e;
+}
+.filter_text .clear_btn{
+    width: 30px;
+    height: 42px;
+    background: none;
+    border: none;
+    position: absolute;
+    right: 30px;
+}
+.filter_text .clear_btn:before{
+    content: "\2716";
+    font-size: medium;
+    color: #324b4e;
 }
 
 .filter_Time{
     position: relative;
     margin-left: 10px;
-    width: 135px;
-    height: 42px;
+    width: 100px;
+    height: 30px;
     padding-left: 15px;
     border-radius: 42px;
     border: 2px solid #324b4e;
     background: #fff;
 }
 .filter_Time input {
-    height: 38px;
+    height: 25px;
     position: absolute;
-    left: 20px;
-    border-right: 1px solid #d2d2d2;
+    left: 12px;
 }
-.filter_Time button {
+.filter_time_interval{
+    /* position: relative; */
+    display: flex;
+}
+.filter_time_input p{
+    font-weight:normal;
+}
+.filter_time_interval button, .filter_time_interval .clear_btn{
     width: 42px;
-    height: 42px;
+    height: 30px;
     background: none;
     border: none;
-    position: absolute;
-    right: 0;
 }
-.filter_Time button:before{
+.filter_time_interval button:before{
     content: "\f002";
     font-family: FontAwesome;
     color: #324b4e;
+}
+.filter_time_interval .clear_btn:before{
+    content: "\2716";
+    font-family: FontAwesome;
+    color: #324b4e;
+}
+.filter_time_btn{
+    width: 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .calendar-container{
