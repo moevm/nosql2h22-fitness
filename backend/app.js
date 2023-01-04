@@ -28,7 +28,7 @@ app.get("/", function(request, response){
     response.send("<h1>Главная страница сервера </h1>");
 });
 
-app.use(multer({dest:"uploads"}).single("filedata"));
+app.use(multer({dest:"uploads"}).single("file"));
 
 
 const url = "mongodb://localhost:27017/";
@@ -113,7 +113,7 @@ mongo.connect(function(err, client){
         deleteData(timetable_collection);
         let path = `./uploads/out_${collection_name}.json`
         createData(timetable_collection, path);
-       }else if(collection_name == 'trainer'){
+       }else if(collection_name == 'trainers'){
         deleteData(trainer_collection);
         let path = `./uploads/out_${collection_name}.json`
         createData(trainer_collection, path);
@@ -136,7 +136,7 @@ mongo.connect(function(err, client){
             exportFile(clients_collection, collection_name)
         }else if(collection_name == 'timetable'){
             exportFile(timetable_collection, collection_name)
-        }else if(collection_name == 'trainer'){
+        }else if(collection_name == 'trainers'){
             exportFile(trainer_collection, collection_name)
         }else if(collection_name == 'users'){
             exportFile(users_collection, collection_name)

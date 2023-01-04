@@ -195,3 +195,29 @@
 .react-calendar__navigation__label{
     font-size: 18px;
 }
+
+.export_import_container{
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+.selectDB{
+    display: none;
+}
+.export_import_container form{
+    margin: 0 10px;
+}
+.export_import_container .inputFile{
+    height: 42px;
+    font-size: 14px;
+}
+.export_import_container .btn{
+    width: 150px;
+    height: 42px;
+    padding: 0 10px;
+    background-color: #29323d;
+    color: white;
+    border-radius: 21px;
+    font-size: 14px;
+    font-weight: bold;
+}
