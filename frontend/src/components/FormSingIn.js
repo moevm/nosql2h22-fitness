@@ -21,22 +21,32 @@ export default function FormSingIn(){
     };
 
     const handleClick = () => {
-        if(login.value === 'admin' && pass.value === 'admin01'){
-            navigate('/user/admin');
-            sessionStorage.setItem('autoriz', login.value);
-        }
-        else{
-            axios
-                .post('/login', {email: login.value, pwd: pass.value})
-                .then(res => {
-                    // console.log(res);
-                    navigate(`/user`);
-                    sessionStorage.setItem('autoriz', res.data._id);
-                })
-                .catch(err => {
-                    console.log('err in data', err);
-                });
-        }
+        axios
+            .post('/login', {email: login.value, pwd: pass.value})
+            .then(res => {
+                if(typeof (res.data) === 'string'){
+                    alert(res.data);
+                }
+                else{
+                    sessionStorage.setItem('autoriz', JSON.stringify({type: res.data.type, FIO: res.data.FIO}));
+                    switch(res.data.type){
+                        case 'admin':
+                            navigate(`/user/admin`);
+                            break;
+                        case 'client':
+                            navigate(`/user/client`);
+                            break;
+                        case 'trainer':
+                            navigate(`/user/trainer`);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            })
+            .catch(err => {
+                console.log('err in data', err);
+            });
     };
 
     return(

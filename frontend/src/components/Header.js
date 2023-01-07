@@ -13,13 +13,13 @@ function Header() {
     };
 
     const selectButton = e => {
-        console.log(sessionStorage)
         if(!sessionStorage.length)
             return(
                 <button id='login_btn' onClick={() => openPage('/login')}>ВОЙТИ</button>
             );
         else{
-            if(sessionStorage.getItem('autoriz') === 'admin'){
+            let user = JSON.parse(sessionStorage.getItem('autoriz')).type;
+            if(user === 'admin'){
                 return(
                     <div className='PA_box'>
                         <p>Администратор</p>
@@ -31,7 +31,7 @@ function Header() {
                 return(
                     <div className='PA_box'>
                         <img id='PA_notice' src={icon} alt='notice'/>
-                        <button id='PA_btn' onClick={() => openPage('/user')}>ЛК</button>
+                        <button id='PA_btn' onClick={() => openPage(`/user/${user}`)}>ЛК</button>
                     </div>
                 );
             }

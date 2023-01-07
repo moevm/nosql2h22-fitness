@@ -44,7 +44,7 @@ module.exports = function(app, db) {
         const note = {email: req.body.email, pwd: req.body.pwd};
         users_collection.findOne(note, async (err, result)=>{
             if (err) { 
-                res.send({ 'error': 'Такого пользователя не зарегистрированои либо введены неверные данные.' }); 
+                res.send({ 'error': 'Введены неверные данные.' }); 
             }else{
                 if(result == undefined){
                     res.send("Такого пользователя не зарегистрированои либо введены неверные данные.")
@@ -52,9 +52,11 @@ module.exports = function(app, db) {
                     res.send(result)
                 }else if(result.type == 'client'){
                     let tmp = await clients_collection.findOne({FIO: result.FIO})
+                    tmp.type = 'client';
                     res.send(tmp);
                 }else{
                     let tmp = await trainer_collection.findOne({FIO: result.FIO})
+                    tmp.type = 'trainer';
                     res.send(tmp);
                 }
             }

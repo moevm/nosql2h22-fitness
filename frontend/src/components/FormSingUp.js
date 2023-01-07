@@ -29,16 +29,21 @@ export default function FormSingUp(){
     };
 
     const handleClick = () => {
-        axios
-            .post('/registration', {fio: fio.value, email: email.value, telephone: tel.val, pwd: pass.value, type: 'client'})
-            .then(res => {
-                // console.log(res);
-                navigate(`/user`);
-                sessionStorage.setItem('autoriz', res.data);
-            })
-            .catch(err => {
-                console.log('err in data', err);
-            });            
+        if(fio.value && email.value && tel.value && pass.value){
+            axios
+                .post('/registration', {fio: fio.value, email: email.value, telephone: tel.value, pwd: pass.value, type: 'client'})
+                .then(res => {
+                    // console.log(res);
+                    navigate(`/user/client`);
+                    sessionStorage.setItem('autoriz', JSON.stringify({type: 'client', FIO: fio.value}));
+                })
+                .catch(err => {
+                    console.log('err in data', err);
+                });            
+        }
+        else{
+            alert('Все поля должны быть заполнены');
+        }
     };
 
     return(
