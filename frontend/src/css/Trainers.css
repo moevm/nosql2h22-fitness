@@ -1,0 +1,80 @@
+.trainers{
+    display: flex;
+    flex-direction: column;
+    color: #3b4754;
+}
+.trainers .title{
+    margin-top: 20px;
+    font-size: 36px;
+    font-style: bold;
+    font-weight: 700;
+    line-height: 42px;
+}
+
+.trainers__filters{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 50px;
+}
+.filter_select{
+    flex-grow: 0.44;
+    text-align: right;
+}
+.filter_select select{
+    width: 180px;
+    height: 32px;
+    padding: 4px 8px 4px 8px;
+    margin-right: 15%;
+    background: white;
+    border-color: #232323;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px 4px 4px 4px;
+    font-family: "Helvetica";
+    font-weight: 400;
+    font-size: 14px;
+    text-align: left;
+}
+
+.trainers__item{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #edf0f4;
+    height: 200px;
+    margin-bottom: 10px;
+}
+.trainers__item img{
+    width: 250px;
+    border-radius: 10px;
+}
+.trainer_FIO{
+    width: 30%;
+    color: #3b4754;
+    font-family: "Open Sans";
+    font-weight: 700;
+    font-size: 28px;
+    text-decoration: underline;
+    line-height: 1.3;
+}
+.list_programs{
+    width: 14%;
+    text-align: center;
+}
+.list_programs p{
+    font-family: "Open Sans";
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 2;
+}
+ol{
+	padding: 0 50px;
+    list-style-type: decimal;
+	font-family: "Open Sans";
+	font-weight: 400;
+	font-size: 18px;
+	text-decoration: underline;
+	line-height: 1.5;
+	text-align: left;
+}
