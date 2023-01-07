@@ -34,9 +34,14 @@ app.use(multer({dest:"uploads"}).single("file"));
 const url = "mongodb://localhost:27017/";
 const mongo = new MongoClient(url);
 
-async function createData(collection, pathToDataFile){
+async function createData(collection, pathToDataFile, flag){
     data_file = await fs.readFileSync(`${pathToDataFile}`);
     docs = await JSON.parse(data_file.toString());
+    if(flag){
+        for(let i = 0; i < docs.length; i++){
+        docs[i].time = Date.parse(docs[i].time);
+        }
+    }
     await collection.insertMany(docs, function(err, result) {
         if (err) throw err;
         console.log(`Inserted docs from ${pathToDataFile}:`, result.insertedCount);
@@ -49,7 +54,7 @@ async function deleteData(collection) {
 }
 
 mongo.connect(function(err, client){
-
+    console.log("Connection");
     const db = client.db("fitnessDB");
     const clients_collection = db.collection('clients');
     const trainer_collection = db.collection('trainer');
@@ -57,7 +62,7 @@ mongo.connect(function(err, client){
     const timetable_collection = db.collection('timetable')
 
     const data_clients = fs.readFileSync('./data/out_clients.json');
-    const data_trainer = fs.readFileSync('./data/out_trainer.json');
+    const data_trainer = fs.readFileSync('./data/out_trainers.json');
     const data_users = fs.readFileSync('./data/out_users.json');
     const data_timetable = fs.readFileSync('./data/out_timetable.json');
 
@@ -100,27 +105,27 @@ mongo.connect(function(err, client){
         // clients, timetables, trainer, users
         let collection_name = req.body.select;
         // console.log(filedata);
-        fs.rename(req.file.path, 'uploads/out_' + collection_name + '.json', function (err) {
+        fs.rename(req.file.path, 'data/out_' + collection_name + '.json', function (err) {
             if (err) throw err;
              console.log('renamed complete');
        });
 
        if(collection_name == 'clients'){
         deleteData(clients_collection);
-        let path = `./uploads/out_${collection_name}.json`
-        createData(clients_collection, path);
+        let path = `./data/out_${collection_name}.json`
+        createData(clients_collection, path, false);
        }else if(collection_name == 'timetable'){
         deleteData(timetable_collection);
-        let path = `./uploads/out_${collection_name}.json`
-        createData(timetable_collection, path);
+        let path = `./data/out_${collection_name}.json`
+        createData(timetable_collection, path, true);
        }else if(collection_name == 'trainers'){
         deleteData(trainer_collection);
-        let path = `./uploads/out_${collection_name}.json`
-        createData(trainer_collection, path);
+        let path = `./data/out_${collection_name}.json`
+        createData(trainer_collection, path, false);
        }else if(collection_name == 'users'){
         deleteData(users_collection);
-        let path = `./uploads/out_${collection_name}.json`
-        createData(users_collection, path);
+        let path = `./data/out_${collection_name}.json`
+        createData(users_collection, path, false);
        }else{
             res.send('Имя коллекции некорректное')
        }
@@ -131,6 +136,7 @@ mongo.connect(function(err, client){
     });
 
     app.post("/download", function (req, res, next) {
+
         let collection_name = req.body.select;
         if(collection_name == 'clients'){
             exportFile(clients_collection, collection_name)
@@ -175,18 +181,18 @@ mongo.connect(function(err, client){
             users_data = await getAllDocuments(users_collection);
             timetable_data = await getAllDocuments(timetable_collection);
             
-            for(let i = 0; i < timetable_data.length; i++){
-                timetable_data[i].time = new Date(docs_timetable[i].time).toISOString();
-            }
-            
             await clients_collection.deleteMany({});
             await trainer_collection.deleteMany({});
             await users_collection.deleteMany({});
             await timetable_collection.deleteMany({});
-            
+
+            for(let i = 0; i < timetable_data.length; i++){
+                timetable_data[i].time = new Date(timetable_data[i].time).toISOString();
+            }
+        
             fs.writeFileSync('./data/out_clients.json', JSON.stringify(clients_data));
             console.log('Done writing to clients file.');
-            fs.writeFileSync('./data/out_trainer.json', JSON.stringify(trainer_data));
+            fs.writeFileSync('./data/out_trainers.json', JSON.stringify(trainer_data));
             console.log('Done writing to trainer file.');
             fs.writeFileSync('./data/out_users.json', JSON.stringify(users_data));
             console.log('Done writing to users file.');
@@ -199,6 +205,8 @@ mongo.connect(function(err, client){
         ctrlcPressed++;
         process.exit();
     }
+
+    process.on("SIGTERM", onInterrupt);
 
     process.on("SIGINT", onInterrupt);
 });

@@ -181,7 +181,7 @@
     justify-content: center;
 }
 
-.calendar-container{
+.timetable_box .calendar-container{
     width: 24%;
     font-size: 18px;
 }
