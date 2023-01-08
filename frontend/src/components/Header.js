@@ -2,6 +2,7 @@ import '../css/reset.css'
 import '../css/Header.css';
 import logo from '../img/logo.png';
 import icon from '../img/icons8.png';
+import exit from '../img/exit.png';
 
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +11,11 @@ function Header() {
 
     const openPage = (path) => {
         navigate(path);
+    };
+
+    const exitPA = () => {
+        sessionStorage.clear();
+        navigate('/login');
     };
 
     const selectButton = e => {
@@ -24,6 +30,7 @@ function Header() {
                     <div className='PA_box'>
                         <p>Администратор</p>
                         <button id='PA_btn' onClick={() => openPage('/user/admin')}>ЛК</button>
+                        <button id='exit_btn' onClick={ () => exitPA() }><img id='exit_icon' src={exit} alt='exit'/></button>
                     </div>
                 );
             }
@@ -32,6 +39,7 @@ function Header() {
                     <div className='PA_box'>
                         <img id='PA_notice' src={icon} alt='notice'/>
                         <button id='PA_btn' onClick={() => openPage(`/user/${user}`)}>ЛК</button>
+                        <button id='exit_btn' onClick={ () => exitPA() }><img id='exit_icon' src={exit} alt='exit'/></button>
                     </div>
                 );
             }
