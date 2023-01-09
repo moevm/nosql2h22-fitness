@@ -68,7 +68,7 @@
     font-size: 26px;
     line-height: 2;
 }
-ol{
+.list_programs > ol{
 	padding: 0 50px;
     list-style-type: decimal;
 	font-family: "Open Sans";

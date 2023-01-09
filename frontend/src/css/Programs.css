@@ -5,7 +5,7 @@
     font-weight: 500;
     line-height: 160%;
 }
-.programs_container .title{
+.programs_container > .title{
     margin-top: 20px;
     font-size: 36px;
     font-style: bold;
