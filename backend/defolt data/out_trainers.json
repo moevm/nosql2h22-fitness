@@ -1,0 +1,60 @@
+[
+{
+    "FIO": "Коренева Оксана Семеновна", 
+    "email": "oxi1970@mail.ru", 
+    "telephone": "89214345678", 
+    "programm": ["Похудение", "Подтянутое тело", "Реабилитация"],
+    "listOfClients": [
+        {"FIO": "Атаманов Сергей Сергеевич", "email": "pivozavr2022@yandex.ru", "telephone": "83687564567"},
+        {"FIO": "Паутова Юлия Владимировна", "email": "yula2019@gmail.com", "telephone": "83687564567"},
+        {"FIO": "Воронцова Елизавета Дмитриевна", "email": "lizka@yandex.ru", "telephone": "89219368692"}]
+},
+{
+    "FIO": "Попков Дмитрий Сергеевич", 
+    "email": "dimon_1996@yandex.ru", 
+    "telephone": "83687564567", 
+    "programm": ["Набор массы"],
+    "listOfClients": [
+        {"FIO": "Рослова Лариса Сергеевна", "email": "orfei2011@mail.ru", "telephone": "83687564567"},
+        {"FIO": "Белобрыкин Никита Борисович", "email": "goodbelyi@gmail.com", "telephone": "95217346546"}]
+},
+{
+    "FIO": "Давыдов Евгений Олегович", 
+    "email": "olegDavydov@yandex.ru", 
+    "telephone": "368785634567", 
+    "programm": ["Набор массы", "Поддержание формы"],
+    "listOfClients": [
+        {"FIO": "Долгий Виктор Борисович", "email": "borets2000@mail.ru", "telephone": "84568734654"},
+        {"FIO": "Безрукова Олеся Дмитриевна", "email": "olbezryk@yandex.ru", "telephone": "88752346547"},
+        {"FIO": "Заболотный Виталий Алексеевич", "email": "rychey1988@gmail.com", "telephone": "83549872645"},
+        {"FIO": "Киселёв Артём Викторович", "email": "temaorel@gmail.ru", "telephone": "89219368692"}]
+},
+{
+    "FIO": "Крутецкий Леонид Дмитриевич", 
+    "email": "bestTrainer@mail.ru", 
+    "telephone": "88005553535", 
+    "programm": ["Похудение", "Реабилитация", "Подтянутое тело"],
+    "listOfClients": [
+        {"FIO": "Рычкова Элина Эдуардовна", "email": "feaelya1212@gmail.com", "telephone": "89213451276"},
+        {"FIO": "Дроздов Генадий Витальевич", "email": "vitalya_drozd@mail.ru", "telephone": "89219368692"}]
+},
+{
+    "FIO": "Павлова Анна Георгиевна", 
+    "email": "anndanse@gmail.com", 
+    "telephone": "87773457612", 
+    "programm": ["Гибкость", "Подтянутое тело"],
+    "listOfClients": [
+        {"FIO": "Соломонова Оксана Дмитриевна", "email": "ptichkaOxi@yandex.ru", "telephone": "89997425749"}]
+},
+{
+    "FIO": "Селезнёв Борис Васильевич", 
+    "email": "drova@yandex.ru", 
+    "telephone": "89873546712", 
+    "programm": ["Похудение", "Поддержание формы"],
+    "listOfClients": [
+        {"FIO": "Долгопрудова Ксения Сергеевна", "email": "xydobaKxi@yandex.ru", "telephone": "82223334455"},
+        {"FIO": "Птичкин Иван Кирилович", "email": "fraer3000@rambler.com", "telephone": "89997425749"},
+        {"FIO": "Рослый Кирил Владимирович", "email": "srosl13@yandex.ru", "telephone": "86667778998"}]
+}
+
+]
