@@ -1,50 +1,127 @@
 [
-    {   "FIO": "Рослова Лариса Сергеевна", 
-        "email": "orfei2011@mail.ru", 
-        "telephone": "89218715463",
-        "programm":"-",
-        "trainer":"Попков Дмитрий Сергеевич"
-    },
-    {
-        "FIO": "Атаманов Сергей Сергеевич", 
-        "email": "pivozavr2022@yandex.ru", 
-        "telephone": "83687564567",
-        "programm":"-",
-        "trainer":"Коренева Оксана Семеновна"
-    },
-    {
-        "FIO": "Паутова Юлия Владимировна", 
-        "email": "yula2019@gmail.com", 
-        "telephone": "12345678901",
-        "programm":"-",
-        "trainer":"Коренева Оксана Семеновна"
-    },
-    {
-        "FIO": "Силкин Дмитрий Александрович", 
-        "email": "dimas12345@gmail.com", 
-        "telephone": "98765432102",
-        "programm":"-",
-        "trainer":"По абонементу"
-    },
-    {
-        "FIO": "Белобрыкин Никита Борисович", 
-        "email": "goodbelyi@gmail.com", 
-        "telephone": "95217346546",
-        "programm":"-",
-        "trainer":"Попков Дмитрий Сергеевич"
-    },
-    {
-        "FIO": "Силкин Владислав Владимирович", 
-        "email": "vlados12345@gmail.com", 
-        "telephone": "83687564567",
-        "programm":"-",
-        "trainer":"По абонементу"
-    },
-    {
-        "FIO": "Воронцова Елизавета Дмитриевна", 
-        "email": "lizka@yandex.ru", 
-        "telephone": "89219368692",
-        "programm":"-",
-        "trainer":"Коренева Оксана Семеновна"
-    }
-    ]
+{   "FIO": "Рослова Лариса Сергеевна", 
+    "email": "orfei2011@mail.ru", 
+    "telephone": "89218715463",
+    "programm":"Набор массы",
+    "trainer":"Попков Дмитрий Сергеевич"
+},
+{
+    "FIO": "Атаманов Сергей Сергеевич", 
+    "email": "pivozavr2022@yandex.ru", 
+    "telephone": "83687564567",
+    "programm":"Похудение",
+    "trainer":"Коренева Оксана Семеновна"
+},
+{
+    "FIO": "Паутова Юлия Владимировна", 
+    "email": "yula2019@gmail.com", 
+    "telephone": "12345678901",
+    "programm":"Подтянутое тело",
+    "trainer":"Коренева Оксана Семеновна"
+},
+{
+    "FIO": "Силкин Дмитрий Александрович", 
+    "email": "dimas12345@gmail.com", 
+    "telephone": "98765432102",
+    "programm":"-",
+    "trainer":"По абонементу"
+},
+{
+    "FIO": "Белобрыкин Никита Борисович", 
+    "email": "goodbelyi@gmail.com", 
+    "telephone": "95217346546",
+    "programm":"Набор массы",
+    "trainer":"Попков Дмитрий Сергеевич"
+},
+{
+    "FIO": "Силкин Владислав Владимирович", 
+    "email": "vlados12345@gmail.com", 
+    "telephone": "83687564567",
+    "programm":"-",
+    "trainer":"По абонементу"
+},
+{
+    "FIO": "Воронцова Елизавета Дмитриевна", 
+    "email": "lizka@yandex.ru", 
+    "telephone": "89219368692",
+    "programm":"Реабилитация",
+    "trainer":"Коренева Оксана Семеновна"
+},
+{
+    "FIO": "Долгий Виктор Борисович", 
+    "email": "borets2000@mail.ru", 
+    "telephone": "84568734654",
+    "programm":"Набор массы",
+    "trainer":"Давыдов Евгений Олегович"
+},
+{
+    "FIO": "Безрукова Олеся Дмитриевна", 
+    "email": "olbezryk@yandex.ru", 
+    "telephone": "88752346547",
+    "programm":"Поддержание формы",
+    "trainer":"Давыдов Евгений Олегович"
+},
+{
+    "FIO": "Заболотный Виталий Алексеевич", 
+    "email": "rychey1988@gmail.com", 
+    "telephone": "83549872645",
+    "programm":"Набор массы",
+    "trainer":"Давыдов Евгений Олегович"
+},
+{
+    "FIO": "Киселёв Артём Викторович", 
+    "email": "temaorel@gmail.ru", 
+    "telephone": "89219368692",
+    "programm":"Поддержание формы",
+    "trainer":"Давыдов Евгений Олегович"
+},
+{
+    "FIO": "Рычкова Элина Эдуардовна", 
+    "email": "feaelya1212@gmail.com", 
+    "telephone": "89213451276",
+    "programm":"Похудение",
+    "trainer":"Крутецкий Леонид Дмитриевич"
+},
+{
+    "FIO": "Дроздов Генадий Витальевич", 
+    "email": "vitalya_drozd@mail.ru", 
+    "telephone": "89219368692",
+    "programm":"Реабилитация",
+    "trainer":"Крутецкий Леонид Дмитриевич"
+},
+{
+    "FIO": "Соломонова Оксана Дмитриевна", 
+    "email": "ptichkaOxi@yandex.ru", 
+    "telephone": "89997425749",
+    "programm":"Гибкость",
+    "trainer":"Павлова Анна Георгиевна"
+},
+{
+    "FIO": "Долгопрудова Ксения Сергеевна", 
+    "email": "xydobaKxi@yandex.ru", 
+    "telephone": "82223334455",
+    "programm":"Похудение",
+    "trainer":"Селезнёв Борис Васильевич"
+},
+{
+    "FIO": "Птичкин Иван Кирилович", 
+    "email": "fraer3000@rambler.com", 
+    "telephone": "89997425749",
+    "programm":"Похудение",
+    "trainer":"Селезнёв Борис Васильевич"
+},
+{
+    "FIO": "Рослый Кирил Владимирович", 
+    "email": "srosl13@yandex.ru", 
+    "telephone": "86667778998",
+    "programm":"Поддержание формы",
+    "trainer":"Селезнёв Борис Васильевич"
+},
+{
+    "FIO": "Дёмин Владимир Алексеевич", 
+    "email": "vovademin@mail.ru", 
+    "telephone": "89345862730",
+    "programm":"-",
+    "trainer":"По абонементу"
+}
+]
