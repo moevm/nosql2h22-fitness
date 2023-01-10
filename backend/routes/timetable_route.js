@@ -94,7 +94,7 @@ module.exports = function(app, collection) {
             const tmp = await collection.find({date: date, $or:[{$and:[{listOfEnrolled: client_reg},{time: {$gte : timeOne, $lte: timeTwo}}]},
                                                                 {$and:[{listOfEnrolled: client_reg},{trainer: trainer_reg}]},
                                                                 {$and:[{time: {$gte : timeOne, $lte: timeTwo}},{trainer: trainer_reg}]}
-                                                                ]}).toArray();    
+                                                                ]}).sort({"time": 1}).toArray();    
             parseTime(tmp);                                      
             res.send(tmp);
         }
@@ -104,7 +104,7 @@ module.exports = function(app, collection) {
                 const tmp = await collection.find({date: date, $or:[{$and:[{listOfEnrolled: client_reg},{time: {$lte: timeTwo}}]},
                                                                     {$and:[{listOfEnrolled: client_reg},{trainer: trainer_reg}]},
                                                                     {$and:[{time: {$lte: timeTwo}},{trainer: trainer_reg}]}
-                                                                    ]}).toArray();  
+                                                                    ]}).sort({"time": 1}).toArray();  
                 parseTime(tmp);                                        
                 res.send(tmp);
             }
@@ -113,42 +113,42 @@ module.exports = function(app, collection) {
                 const tmp = await collection.find({date: date, $or:[{$and:[{listOfEnrolled: client_reg},{time: {$gte : timeOne}}]},
                                                                     {$and:[{listOfEnrolled: client_reg},{trainer: trainer_reg}]},
                                                                     {$and:[{time: {$gte : timeOne}},{trainer: trainer_reg}]}
-                                                                    ]}).toArray();  
+                                                                    ]}).sort({"time": 1}).toArray();  
                 parseTime(tmp);                                        
                 res.send(tmp);
             }
             if(flag == 0){
                 // console.log("я тут, флаг 0");
-                const tmp = await collection.find({date: date, $or:[{$and:[{listOfEnrolled: client_reg},{trainer: trainer_reg}]}]}).toArray();
+                const tmp = await collection.find({date: date, $or:[{$and:[{listOfEnrolled: client_reg},{trainer: trainer_reg}]}]}).sort({"time": 1}).toArray();
                 parseTime(tmp);                                          
                 res.send(tmp);
             }
         }
 
         async function filterOnlyDate() {
-            const tmp = await collection.find({date: date}).toArray();
+            const tmp = await collection.find({date: date}).sort({"time": 1}).toArray();
             parseTime(tmp);
             res.send(tmp);
         }
 
         async function filterOnlyOne() {
-            const tmp = await collection.find({date: date, $or:[{listOfEnrolled: client_reg},{time: {$gte : timeOne, $lte: timeTwo}},{trainer: trainer_reg}]}).toArray(); 
+            const tmp = await collection.find({date: date, $or:[{listOfEnrolled: client_reg},{time: {$gte : timeOne, $lte: timeTwo}},{trainer: trainer_reg}]}).sort({"time": 1}).toArray(); 
             parseTime(tmp);                                         
             res.send(tmp);
         }
         async function filterOnlyOneT() {
             if(flag == 2){
-                const tmp = await collection.find({date: date, $or:[{listOfEnrolled: client_reg},{time: {$lte: timeTwo}},{trainer: trainer_reg}]}).toArray(); 
+                const tmp = await collection.find({date: date, $or:[{listOfEnrolled: client_reg},{time: {$lte: timeTwo}},{trainer: trainer_reg}]}).sort({"time": 1}).toArray(); 
                 parseTime(tmp);                                         
                 res.send(tmp);
             }
             if(flag == 1){
-                const tmp = await collection.find({date: date, $or:[{listOfEnrolled: client_reg},{time: {$gte : timeOne}},{trainer: trainer_reg}]}).toArray(); 
+                const tmp = await collection.find({date: date, $or:[{listOfEnrolled: client_reg},{time: {$gte : timeOne}},{trainer: trainer_reg}]}).sort({"time": 1}).toArray(); 
                 parseTime(tmp);                                         
                 res.send(tmp);
             }
             if(flag == 0){
-                const tmp = await collection.find({date: date, $or:[{listOfEnrolled: client_reg},{trainer: trainer_reg}]}).toArray(); 
+                const tmp = await collection.find({date: date, $or:[{listOfEnrolled: client_reg},{trainer: trainer_reg}]}).sort({"time": 1}).toArray(); 
                 parseTime(tmp);                                         
                 res.send(tmp);
             }
@@ -156,18 +156,18 @@ module.exports = function(app, collection) {
         }
 
         async function filterAll() {
-            const tmp = await collection.find({date: date, listOfEnrolled: client_reg, time: {$gte : timeOne, $lte: timeTwo}, trainer: trainer_reg}).toArray();                                          
+            const tmp = await collection.find({date: date, listOfEnrolled: client_reg, time: {$gte : timeOne, $lte: timeTwo}, trainer: trainer_reg}).sort({"time": 1}).toArray();                                          
             parseTime(tmp); 
             res.send(tmp);
         }
         async function filterAllT() {
             if(flag == 2){
-                const tmp = await collection.find({date: date, listOfEnrolled: client_reg, time: {$lte: timeTwo}, trainer: trainer_reg}).toArray();                                          
+                const tmp = await collection.find({date: date, listOfEnrolled: client_reg, time: {$lte: timeTwo}, trainer: trainer_reg}).sort({"time": 1}).toArray();                                          
                 parseTime(tmp);                                         
                 res.send(tmp);
             }
             if(flag == 1){
-                const tmp = await collection.find({date: date, listOfEnrolled: client_reg, time: {$gte : timeOne}, trainer: trainer_reg}).toArray();                                          
+                const tmp = await collection.find({date: date, listOfEnrolled: client_reg, time: {$gte : timeOne}, trainer: trainer_reg}).sort({"time": 1}).toArray();                                          
                 parseTime(tmp);                                         
                 res.send(tmp);
             }
