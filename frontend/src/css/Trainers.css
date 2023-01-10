@@ -41,18 +41,22 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: #edf0f4;
     height: 200px;
-    margin-bottom: 10px;
+}
+.color_gray{
+    background-color: #edf0f4;
+}
+.color_white{
+    background-color: #fff;
 }
 .trainers__item img{
     width: 250px;
+    max-height: 185px;
     border-radius: 10px;
 }
 .trainer_FIO{
     width: 30%;
     color: #3b4754;
-    font-family: "Open Sans";
     font-weight: 700;
     font-size: 28px;
     text-decoration: underline;
@@ -63,7 +67,6 @@
     text-align: center;
 }
 .list_programs p{
-    font-family: "Open Sans";
     font-weight: 700;
     font-size: 26px;
     line-height: 2;
@@ -71,10 +74,8 @@
 .list_programs > ol{
 	padding: 0 50px;
     list-style-type: decimal;
-	font-family: "Open Sans";
 	font-weight: 400;
 	font-size: 18px;
-	text-decoration: underline;
 	line-height: 1.5;
 	text-align: left;
 }
