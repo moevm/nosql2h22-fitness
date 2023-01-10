@@ -1,12 +1,21 @@
-import '../css/Trainers.css'
-import koreneva_img from '../img/Koreneva.png';
-import popkov_img from '../img/Popkov.png';
+import '../css/Trainers.css';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function Trainers(){
+    const [data, setData] = useState([]);
     const [filterValueFIO, setFilterValueFIO] = useState('');
-    const [filterValueProgram, setFilterValueProgram] = useState('all');
+    const [filterValueProgram, setFilterValueProgram] = useState('');
+
+    useEffect(()=>{
+        axios
+            .get('/trainers')
+            .then(res => {
+                console.log(res.data);
+                setData(res.data);
+            })
+    },[])
 
     const handleChange = (e) => {
         e.stopPropagation();
@@ -16,16 +25,15 @@ export default function Trainers(){
                 break;
             case 'program':
                 setFilterValueProgram(e.target.value);
-                console.log(e.target.value);
-            //  axios
-            //     .post(`/${props.name_DB}/filter`, {fio: filterValueFIO, tel: filterValueTel, email: filterValueEmail})
-            //     .then(res => {
-            //         // console.log(res);
-            //         setData(res.data);
-            //     })
-            //     .catch(err => {
-            //         console.log('err in data', err);
-            //     });
+                axios
+                    .post('/trainers_page/filter', {trainer: filterValueFIO, programm: e.target.value})
+                    .then(res => {
+                        // console.log(res);
+                        setData(res.data);
+                    })
+                    .catch(err => {
+                        console.log('err in data', err);
+                    });
                 break;
             default:
                 break;
@@ -34,37 +42,35 @@ export default function Trainers(){
 
     const handleClick = (e) => {
         e.stopPropagation();
-        // axios
-        //     .post(`/${props.name_DB}/filter`, {fio: filterValueFIO, tel: filterValueTel, email: filterValueEmail})
-        //     .then(res => {
-        //         // console.log(res);
-        //         setData(res.data);
-        //     })
-        //     .catch(err => {
-        //         console.log('err in data', err);
-        //     });
+        axios
+            .post('/trainers_page/filter', {trainer: filterValueFIO, programm: filterValueProgram})
+            .then(res => {
+                // console.log(res);
+                setData(res.data);
+            })
+            .catch(err => {
+                console.log('err in data', err);
+            });
     };
 
     const clearFilter = (e) => {
         e.stopPropagation();
-        let curFilterValueFIO = filterValueFIO;
         switch (e.target.name){
             case 'FIO':
                 setFilterValueFIO('');
-                curFilterValueFIO = '';
                 break;
             default:
                 break;
         }
-        // axios
-        //     .post(`/tainer/filter`, {fio: curFilterValueFIO, program: curFilterValueProgram})
-        //     .then(res => {
-        //         // console.log(res);
-        //         setData(res.data);
-        //     })
-        //     .catch(err => {
-        //         console.log('err in data', err);
-        //     });        
+        axios
+            .post('/trainers_page/filter', {trainer: '', programm: filterValueProgram}) 
+            .then(res => {
+                // console.log(res);
+                setData(res.data);
+            })
+            .catch(err => {
+                console.log('err in data', err);
+            });        
     };
 
     return(
@@ -78,38 +84,33 @@ export default function Trainers(){
                 </div>
                 <div className='filter_select'>
                     <select onChange={ e => handleChange(e) } name='program'>
-                        <option value="all">Все программы</option>
-                        <option value='weight_loss'>Похудение</option>
-                        <option value='toned_body'>Подтянутое тело</option>
-                        <option value='plasticity'>Гибкость</option>
-                        <option value='rehab'>Реабилитация</option>
-                        <option value='weight_gain'>Набор массы</option>
-                        <option value='keeping_fit'>Поддержание формы</option>
+                        <option value="">Все программы</option>
+                        <option value='Похудение'>Похудение</option>
+                        <option value='Подтянутое тело'>Подтянутое тело</option>
+                        <option value='Гибкость'>Гибкость</option>
+                        <option value='Реабилитация'>Реабилитация</option>
+                        <option value='Набор массы'>Набор массы</option>
+                        <option value='Поддержание формы'>Поддержание формы</option>
                     </select>
                 </div>
             </div>    
-            <div className='trainers__item'>
-                <img src={koreneva_img} alt='koreneva'/>
-                <a className='trainer_FIO' href=''>Коренева Оксана Семеновна</a>
-                <div className='list_programs'>
-                    <p>Программы</p>
-                    <ol>
-                        <li>Похудение</li>
-                        <li>Подтянутое тело</li>
-                        <li>Реабилитация</li>
-                    </ol>
-                </div>
-            </div>
-            <div className='trainers__item'>
-                <img src={popkov_img} alt='popkov'/>
-                <a className='trainer_FIO' href=''>Попков Дмитрий Сергеевич</a>
-                <div className='list_programs'>
-                    <p>Программы</p>
-                    <ol>
-                        <li>Набор массы</li>
-                    </ol>
-                </div>
-            </div>
+            
+                {data.map((item,i)=>{
+                    return(
+                        <div key={i} className={`trainers__item ${i%2==0 ? 'color_gray' : 'color_whute'}`}>
+                            <img src={item.img} alt='photo'/>
+                            <a className='trainer_FIO' href=''>{item.FIO}</a>
+                            <div className='list_programs'>
+                                <p>Программы</p>
+                                <ol>
+                                    {item.programm.map(el=>{
+                                        return(<li key={el}>{el}</li>);
+                                    })}
+                                </ol>
+                            </div>
+                        </div>
+                    );
+                })}
         </div>
     );
-}
+};

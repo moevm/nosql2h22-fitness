@@ -32,7 +32,7 @@ export default function News(){
                         <img src={second_new} alt='first_new'/>
                         <p>Наши тренера на первом месте!</p>
                     </div>
-                    <button className='more__btn' onClick={e=>openModal(e, {title: 'Наши тренера на первом месте!', img: second_new, more_info:'Наш тренер Виталий Логинов занял первое место в международном конкурсе бодибилдинга "Siberian Power Show 2022"'})}>ПОДРОБНЕЕ</button>
+                    <button className='more__btn' onClick={e=>openModal(e, {title: 'Наши тренера на первом месте!', img: second_new, more_info:'Наш тренер Евгений Давыдов занял первое место в международном конкурсе бодибилдинга "Siberian Power Show 2022"'})}>ПОДРОБНЕЕ</button>
                 </div>
                 <div className='news__content_item'>
                     <div className='front'>
