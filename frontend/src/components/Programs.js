@@ -17,7 +17,7 @@ const dataModal = [
         more_info:'На этих занятиях тренер составит для Вас индивидуальную программу упражнений ориентированную на сжигание жира, а также будет давать Вам консультации по питанию для более быстрого и чёткого результата!',
         trainers: ['Коренева Оксана Семеновна']
     },
-    {title: 'Подтянотуое тело', img: toned_body, more_info: '...'},
+    {title: 'Подтянутое тело', img: toned_body, more_info: '...'},
     {title: 'Гибкость', img: plasticity, more_info: '...'},
     {title: 'Реабилитация', img: rehab, more_info: '...'},
     {title: 'Набор массы', img: weight_gain, more_info: '...'},
@@ -46,7 +46,7 @@ export default function Programs(){
                     <button className='more__btn' onClick={e=>openModal(e, 0)}>ПОДРОБНЕЕ</button>
                 </div>
                 <div className='programs__content_item'>
-                    <p>Подтянотуое тело</p>
+                    <p>Подтянутое тело</p>
                     <div className='front'>
                         <img src={toned_body} alt='toned_body'/>
                         <p>Для получения подтянутой фигуры без лишних массивов мышц</p>
