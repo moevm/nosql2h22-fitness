@@ -115,4 +115,57 @@ module.exports = function(app, collection) {
         }
     });
 
+    app.post('/trainers_page/filter', (req, res) => {
+        const programm = req.body.programm;
+        const trainer = req.body.trainer;
+    
+        let parametres = 0;
+        let programm_reg;
+        let trainer_reg;
+
+        if(programm!=''){
+            programm_reg = new RegExp(`${programm}`, 'i');
+            parametres++;
+        }
+        if(trainer!=''){
+            trainer_reg = new RegExp(`${trainer}`, 'i');
+            parametres++;
+        }
+        
+        if(parametres == 0){
+            console.log("send all trainers");
+            getAllDocuments();
+        }
+        if(parametres == 2){
+            filterOnlyTwo();
+            console.log("filter trainers 2 param");
+            
+        }
+        if(parametres == 1){
+            console.log("filter trainer 1 param");
+            filterOnlyOne();
+        }
+
+        async function filterOnlyTwo() {
+            const tmp = await collection.find({$and:[{programm: programm_reg},{FIO: trainer_reg}]}).toArray();    
+            res.send(tmp);
+        }
+        
+        async function getAllDocuments() {
+            try {
+                const tmp = await collection.find().toArray();
+                res.send(tmp)
+                 
+            }catch(err) {
+                console.log(err);
+            }
+        }
+
+        async function filterOnlyOne() {
+            const tmp = await collection.find({$or:[{programm: programm_reg},{FIO: trainer_reg}]}).toArray();                                         
+            res.send(tmp);
+        }
+
+    });
+
 }
