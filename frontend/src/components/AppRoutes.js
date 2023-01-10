@@ -6,6 +6,7 @@ import ClientPage from './ClientPage';
 import TrainerPage from './TrainerPage';
 import ProgramsSubscriptionsPage from './ProgramsSubscriptionsPage';
 import Trainers from './Trainers';
+import ListOfClients from './ListOfClients';
 
 export default function AppRoutes() {
 
@@ -17,7 +18,8 @@ export default function AppRoutes() {
             <Route path='/user/client' element={<ClientPage/>}/>
             <Route path='/user/trainer' element={<TrainerPage/>}/>
             <Route path='/programs&subscriptions' element={<ProgramsSubscriptionsPage/>}/>
-            <Route path='trainers' element={<Trainers/>}/>
+            <Route path='/trainers' element={<Trainers/>}/>
+            <Route path='/listOfClients/:FIO' element={<ListOfClients/>}/>
         </Routes>
     );
 };
