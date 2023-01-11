@@ -81,7 +81,7 @@
     font-size: 18px;
 }
 
-.cell_filter{
+.adminPage__box .cell_filter{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -136,7 +136,7 @@
     color: #324b4e;
 }
 
-.filter_Time{
+.adminPage__box .filter_Time{
     position: relative;
     margin-left: 10px;
     width: 100px;
@@ -146,35 +146,35 @@
     border: 2px solid #324b4e;
     background: #fff;
 }
-.filter_Time input {
+.adminPage__box .filter_Time input {
     height: 25px;
     position: absolute;
     left: 12px;
 }
-.filter_time_interval{
+.adminPage__box .filter_time_interval{
     /* position: relative; */
     display: flex;
 }
-.filter_time_input p{
+.adminPage__box .filter_time_input p{
     font-weight:normal;
 }
-.filter_time_interval button, .filter_time_interval .clear_btn{
+.adminPage__box .filter_time_interval button, .adminPage__box .filter_time_interval .clear_btn{
     width: 42px;
     height: 30px;
     background: none;
     border: none;
 }
-.filter_time_interval button:before{
+.adminPage__box .filter_time_interval button:before{
     content: "\f002";
     font-family: FontAwesome;
     color: #324b4e;
 }
-.filter_time_interval .clear_btn:before{
+.adminPage__box .filter_time_interval .clear_btn:before{
     content: "\2716";
     font-family: FontAwesome;
     color: #324b4e;
 }
-.filter_time_btn{
+.adminPage__box .filter_time_btn{
     width: 42px;
     display: flex;
     flex-direction: column;
@@ -182,8 +182,9 @@
 }
 
 .timetable_box .calendar-container{
-    width: 24%;
+    width: 25%;
     font-size: 18px;
+    margin-right: 40px;
 }
 
 .react-calendar{
