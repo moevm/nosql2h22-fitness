@@ -3,7 +3,7 @@
     justify-content: space-around;
 }
 
-.news__content_item img{
+.news__content_item .front img{
     width: 200px;
     height: 200px;
 }
@@ -24,7 +24,7 @@
     color: #798da3;
 }
 
-.news .title{
+.news > .title{
     margin: 20px 50px;
     font-size: 26px;
     font-weight: bold;

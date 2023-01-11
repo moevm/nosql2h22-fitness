@@ -121,13 +121,13 @@ export default function ClientsTrainersTable(props){
                 {data.map(item => {
                     return(
                         <tr key={item._id}>
-                            <td key={item.FIO}>{item.FIO}</td>
-                            <td key={item.telephone}>{item.telephone}</td>
-                            <td key={item.email}>{item.email}</td>
-                        </tr>
-                    );
-                })}
-            </tbody>
-        </table>
+                                <td key={item.FIO}>{props.name_DB==='trainers' ? <a href={`/listOfClients/${item.FIO}`}>{item.FIO}</a> : item.FIO}</td>
+                                <td key={item.telephone}>{item.telephone}</td>
+                                <td key={item.email}>{item.email}</td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
     );
 };

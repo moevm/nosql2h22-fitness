@@ -39,7 +39,7 @@
     "email": "orfei2011@mail.ru", 
     "telephone": "83687564567",
     "pwd": "roslova123",
-    "type": "admin"
+    "type": "client"
 },
 {
     "FIO": "Силкин Владислав Владимирович", 
@@ -47,5 +47,138 @@
     "telephone": "83687564567",
     "pwd": "vlados",
     "type": "client"
+},
+{
+    "FIO": "Силкин Дмитрий Александрович", 
+    "email": "dimas12345@gmail.com", 
+    "telephone": "98765432102",
+    "pwd":"dimas123",
+    "type":"client"
+},
+{
+    "FIO": "Белобрыкин Никита Борисович", 
+    "email": "goodbelyi@gmail.com", 
+    "telephone": "95217346546",
+    "pwd":"hththdgdgh",
+    "type":"client"
+},
+{
+    "FIO": "Силкин Владислав Владимирович", 
+    "email": "vlados12345@gmail.com", 
+    "telephone": "83687564567",
+    "pwd":"fdghjyfsdf",
+    "type":"client"
+},
+{
+    "FIO": "Воронцова Елизавета Дмитриевна", 
+    "email": "lizka@yandex.ru", 
+    "telephone": "89219368692",
+    "pwd":"dfgdghjsfg",
+    "type":"client"
+},
+{
+    "FIO": "Долгий Виктор Борисович", 
+    "email": "borets2000@mail.ru", 
+    "telephone": "84568734654",
+    "pwd":"lskdfhbjgt",
+    "type":"client"
+},
+{
+    "FIO": "Безрукова Олеся Дмитриевна", 
+    "email": "olbezryk@yandex.ru", 
+    "telephone": "88752346547",
+    "pwd":"lsdyrbvhfg",
+    "type":"client"
+},
+{
+    "FIO": "Заболотный Виталий Алексеевич", 
+    "email": "rychey1988@gmail.com", 
+    "telephone": "83549872645",
+    "pwd":"lsdfjngjt",
+    "type":"client"
+},
+{
+    "FIO": "Киселёв Артём Викторович", 
+    "email": "temaorel@gmail.ru", 
+    "telephone": "89219368692",
+    "pwd":"kdfjkfhjweeb",
+    "type":"client"
+},
+{
+    "FIO": "Рычкова Элина Эдуардовна", 
+    "email": "feaelya1212@gmail.com", 
+    "telephone": "89213451276",
+    "pwd":"lsadlwkfjv",
+    "type":"client"
+},
+{
+    "FIO": "Дроздов Генадий Витальевич", 
+    "email": "vitalya_drozd@mail.ru", 
+    "telephone": "89219368692",
+    "pwd":"dbfjbfhjbd",
+    "type":"client"
+},
+{
+    "FIO": "Соломонова Оксана Дмитриевна", 
+    "email": "ptichkaOxi@yandex.ru", 
+    "telephone": "89997425749",
+    "pwd":"sknfjbvhrb",
+    "type":"client"
+},
+{
+    "FIO": "Долгопрудова Ксения Сергеевна", 
+    "email": "xydobaKxi@yandex.ru", 
+    "telephone": "82223334455",
+    "pwd":"skfnjrnrjn",
+    "type":"client"
+},
+{
+    "FIO": "Птичкин Иван Кирилович", 
+    "email": "fraer3000@rambler.com", 
+    "telephone": "89997425749",
+    "pwd":"sldkfvnjrb",
+    "type":"client"
+},
+{
+    "FIO": "Рослый Кирил Владимирович", 
+    "email": "srosl13@yandex.ru", 
+    "telephone": "86667778998",
+    "pwd":"knfjetgfd",
+    "type":"client"
+},
+{
+    "FIO": "Дёмин Владимир Алексеевич", 
+    "email": "vovademin@mail.ru", 
+    "telephone": "89345862730",
+    "pwd":"lsnfjvjrbhjbg",
+    "type":"client"
+},
+{
+    "FIO": "Давыдов Евгений Олегович", 
+    "email": "olegDavydov@yandex.ru", 
+    "telephone": "368785634567", 
+    "pwd": "jbbvhjdfbhskd",
+    "type": "trainer"
+},
+{
+    "FIO": "Крутецкий Леонид Дмитриевич", 
+    "email": "bestTrainer@mail.ru", 
+    "telephone": "88005553535", 
+    "pwd": "eurhbbkasjdn",
+    "type": "trainer"
+},
+{
+    "FIO": "Павлова Анна Георгиевна", 
+    "email": "anndanse@gmail.com", 
+    "telephone": "87773457612", 
+    "pwd": "ksdnnalmebrb",
+    "type": "trainer"
+},
+{
+    "FIO": "Селезнёв Борис Васильевич", 
+    "email": "drova@yandex.ru", 
+    "telephone": "89873546712", 
+    "pwd": "letynbcskthnd",
+    "type": "trainer"
 }
 ]

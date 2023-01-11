@@ -1,6 +1,8 @@
 import '../css/reset.css'
 import '../css/Header.css';
 import logo from '../img/logo.png';
+import icon from '../img/icons8.png';
+import exit from '../img/exit.png';
 
 import { useNavigate } from "react-router-dom";
 
@@ -11,26 +13,33 @@ function Header() {
         navigate(path);
     };
 
+    const exitPA = () => {
+        sessionStorage.clear();
+        navigate('/login');
+    };
+
     const selectButton = e => {
-        console.log(sessionStorage)
         if(!sessionStorage.length)
             return(
                 <button id='login_btn' onClick={() => openPage('/login')}>ВОЙТИ</button>
             );
         else{
-            if(sessionStorage.getItem('autoriz') === 'admin'){
+            let user = JSON.parse(sessionStorage.getItem('autoriz')).type;
+            if(user === 'admin'){
                 return(
                     <div className='PA_box'>
                         <p>Администратор</p>
                         <button id='PA_btn' onClick={() => openPage('/user/admin')}>ЛК</button>
+                        <button id='exit_btn' onClick={ () => exitPA() }><img id='exit_icon' src={exit} alt='exit'/></button>
                     </div>
                 );
             }
             else{
                 return(
-                    <div>
-                        <button>ув</button>
-                        <button>ЛК</button>
+                    <div className='PA_box'>
+                        <img id='PA_notice' src={icon} alt='notice'/>
+                        <button id='PA_btn' onClick={() => openPage(`/user/${user}`)}>ЛК</button>
+                        <button id='exit_btn' onClick={ () => exitPA() }><img id='exit_icon' src={exit} alt='exit'/></button>
                     </div>
                 );
             }
