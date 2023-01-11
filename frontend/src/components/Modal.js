@@ -3,7 +3,7 @@ import '../css/Modal.css';
 export default function Modal(props){
     const getTrainers = () => {
         return(
-            <div>
+            <div className='modal_more_info'>
                 <p>Ведущие тренера:</p>
                 <ol className='trainers_list'>
                     {props.content.trainers.map(item=>{
