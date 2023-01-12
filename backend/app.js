@@ -31,7 +31,7 @@ app.get("/", function(request, response){
 app.use(multer({dest:"uploads"}).single("file"));
 
 
-const url = "mongodb://mongo:27017/";
+const url = "mongodb://localhost:27017/";
 const mongo = new MongoClient(url);
 
 async function createData(collection, pathToDataFile, flag){
@@ -60,23 +60,29 @@ mongo.connect(function(err, client){
     const trainer_collection = db.collection('trainer');
     const users_collection = db.collection('users');
     const timetable_collection = db.collection('timetable')
+    const review_collection = db.collection('review')
 
     const data_clients = fs.readFileSync('./data/out_clients.json');
     const data_trainer = fs.readFileSync('./data/out_trainers.json');
     const data_users = fs.readFileSync('./data/out_users.json');
     const data_timetable = fs.readFileSync('./data/out_timetable.json');
+    const data_review = fs.readFileSync('./data/out_review.json');
 
     const docs_clients = JSON.parse(data_clients.toString());
     const docs_trainer = JSON.parse(data_trainer.toString());
     const docs_users = JSON.parse(data_users.toString());
     const docs_timetable = JSON.parse(data_timetable.toString());
+    const docs_review = JSON.parse(data_review.toString());
+    
     // console.log(docs_timetable);
     for(let i = 0; i < docs_timetable.length; i++){
         docs_timetable[i].time = Date.parse(docs_timetable[i].time);
         // console.log(docs_timetable[i].time);
     }
-    
-
+    for(let i = 0; i < docs_review.length; i++){
+        docs_review[i].date = Date.parse(docs_review[i].date);
+        // console.log(docs_timetable[i].time);
+    }
     
     clients_collection.insertMany(docs_clients, function(err, result) {
             if (err) throw err;
@@ -94,11 +100,16 @@ mongo.connect(function(err, client){
         if (err) throw err;
         console.log('Inserted docs_timetable:', result.insertedCount);
     });
+    review_collection.insertMany(docs_review, function(err, result) {
+        if (err) throw err;
+        console.log('Inserted docs_review:', result.insertedCount);
+    });
 
     require('./routes/client_route')(app, db);
     require('./routes/trainer_route')(app, trainer_collection);
     require('./routes/users_route')(app, db);
     require('./routes/timetable_route')(app, timetable_collection);
+    require('./routes/review_route')(app, review_collection);
     
     app.post("/upload", function (req, res, next) {
         let filedata = req.file;
@@ -180,14 +191,19 @@ mongo.connect(function(err, client){
             trainer_data = await getAllDocuments(trainer_collection);
             users_data = await getAllDocuments(users_collection);
             timetable_data = await getAllDocuments(timetable_collection);
-            
+            review_data = await getAllDocuments(review_collection);
+
             await clients_collection.deleteMany({});
             await trainer_collection.deleteMany({});
             await users_collection.deleteMany({});
             await timetable_collection.deleteMany({});
+            await review_collection.deleteMany({});
 
             for(let i = 0; i < timetable_data.length; i++){
                 timetable_data[i].time = new Date(timetable_data[i].time).toISOString();
+            }
+            for(let i = 0; i < review_data.length; i++){
+                review_data[i].date = new Date(review_data[i].date).toISOString();
             }
         
             fs.writeFileSync('./data/out_clients.json', JSON.stringify(clients_data));
@@ -198,6 +214,8 @@ mongo.connect(function(err, client){
             console.log('Done writing to users file.');
             fs.writeFileSync('./data/out_timetable.json', JSON.stringify(timetable_data));
             console.log('Done writing to timetable file.');
+            fs.writeFileSync('./data/out_review.json', JSON.stringify(review_data));
+            console.log('Done writing to review file.');
             
             await client.close()
         }
