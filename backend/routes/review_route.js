@@ -53,7 +53,15 @@ module.exports = function(app, collection) {
                 res.send({ 'error': 'An error has occurred review' }); 
               } else {
                 console.log(`\n`);
-                res.send('Add new review'); 
+                async function filter() {
+                    try {
+                    const tmp = await collection.find({}).sort({"date": 1}).toArray();
+                        res.send(tmp)
+                    }catch(err) {
+                        console.log(err);
+                    }
+                }
+                filter()
               }
         });
     });
