@@ -146,21 +146,21 @@ mongo.connect(function(err, client){
             res.send("Файл загружен");
     });
 
-    app.post("/download", function (req, res, next) {
+    app.post("/download", async function (req, res, next) {
 
         let collection_name = req.body.select;
         if(collection_name == 'clients'){
-            exportFile(clients_collection, collection_name)
+            await exportFile(clients_collection, collection_name)
         }else if(collection_name == 'timetable'){
-            exportFile(timetable_collection, collection_name)
+            await exportFile(timetable_collection, collection_name)
         }else if(collection_name == 'trainers'){
-            exportFile(trainer_collection, collection_name)
+           await exportFile(trainer_collection, collection_name)
         }else if(collection_name == 'users'){
-            exportFile(users_collection, collection_name)
+           await exportFile(users_collection, collection_name)
         }else{
             res.send('Имя коллекции некорректное')
         }
-        res.download(`./data/out_${collection_name}.json`);
+        await res.download(`./data/out_${collection_name}.json`);
     });
 
     app.listen(port, ()=>{
