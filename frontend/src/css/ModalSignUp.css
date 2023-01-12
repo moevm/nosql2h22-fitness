@@ -1,4 +1,4 @@
-.modalSingUp{
+.modalSignUp{
     max-width: 500px;
     background-color: #edf0f4;
     padding: 25px;
@@ -8,7 +8,7 @@
     position: relative;
 }
 
-.modalSingUp .close_btn{
+.modalSignUp .close_btn{
     width: 30px;
     height: 42px;
     background: none;
@@ -17,13 +17,13 @@
     top: 0px;
     right: 0px;
 }
-.modalSingUp .close_btn:before{
+.modalSignUp .close_btn:before{
     content: "\2716";
     font-size: medium;
     color: #324b4e;
 }
 
-.modalSingUp > .title{
+.modalSignUp > .title{
     margin-bottom: 20px;
     color: #3b4754;
     font-weight: 700;
@@ -32,7 +32,16 @@
     text-align: center;
 }
 
-.modalSingUp > p{
+.modalSignUp > .message{
+    color: #798da3;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.modalSignUp > p{
     color: #3b4754;
     font-weight: 600;
     font-size: 20px;

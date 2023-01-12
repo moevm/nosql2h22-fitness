@@ -3,7 +3,7 @@ import '../css/TrainerCard.css';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ModalSingUp from './ModalSingUp';
+import ModalSignUp from './ModalSignUp';
 
 export default function TrainerCard(){
     const [data, setData] = useState({});
@@ -47,7 +47,7 @@ export default function TrainerCard(){
                 </div>        
             </div>
             { (sessionStorage.length && JSON.parse(sessionStorage.getItem('autoriz')).type==='client') ? <button className="more__btn" onClick={openModal}>ЗАПИСАТЬСЯ</button> : <div></div>}
-            <ModalSingUp isOpenModal={isOpenModal} setClose={setOpenModal} content={{FIO: curFIO, programs: data.programm}}/>
+            <ModalSignUp isOpenModal={isOpenModal} setClose={setOpenModal} content={{FIO: curFIO, programs: data.programm}}/>
         </div>
     );
 };

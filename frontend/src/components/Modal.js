@@ -8,11 +8,10 @@ export default function Modal(props){
                 <ol className='trainers_list'>
                     {props.content.trainers.map(item=>{
                         return(
-                            <li key={item}>{item}</li>
+                            <li key={item}><a className='href' href={`/trainer/${item}`}>{item}</a></li>
                         );
                     })}
                 </ol>
-                <button className='more__btn'>КУПИТЬ</button>
             </div>
         );
     };
