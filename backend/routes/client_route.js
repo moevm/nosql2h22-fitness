@@ -154,5 +154,26 @@ module.exports = function(app, db) {
         setClientTrainerData();
     });
 
+    //Покупка абонемента
+    app.post('/clients/signforsubscription', (req, res) => {
+        const fio = req.body.fio;
+        const programm = req.body.programm;
+
+        async function setClientData() {
+            try {
+                const client = await clients_collection.find({FIO: fio}).toArray();
+                if(client[0].trainer == '-'){
+                    await clients_collection.updateOne({FIO: fio}, {$set: {trainer: 'По абонементу', programm: programm}});
+                    res.send("Вы приобрели абонемент");
+                }else{
+                    res.send("Вы уже записаны к тренеру/приобрели абонемент. Для смены программы обратитесь к администратору.")
+                }
+            }catch(err) {
+                console.log(err);
+            }
+        }
+        setClientData();
+    });
+
 
 }
