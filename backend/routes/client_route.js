@@ -128,4 +128,31 @@ module.exports = function(app, db) {
         }
     });
 
+    // Запись к тренеру
+    app.post('/clients/signfortrainer', (req, res) => {
+        const fio = req.body.fio;
+        const trainer = req.body.trainer;
+        const programm = req.body.programm;
+
+        async function setClientTrainerData() {
+            try {
+                const client = await clients_collection.find({FIO: fio}).toArray();
+                if(client[0].trainer == '-'){
+                    await clients_collection.updateOne({FIO: fio}, {$set: {trainer: trainer, programm: programm}});
+                    delete client[0].programm;
+                    delete client[0].trainer;
+                    await trainer_collection.updateOne({FIO: trainer}, {$push: {listOfClients: client[0]}});
+                    res.send("Вы записались к тренеру и его данные обновлены")
+                }else{
+                    res.send("Вы уже записаны к тренеру/приобрели абонемент. Для смены программы обратитесь к администратору.")
+                }
+            }catch(err) {
+                console.log(err);
+            }
+        }
+
+        setClientTrainerData();
+    });
+
+
 }
