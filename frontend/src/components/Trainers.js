@@ -97,9 +97,9 @@ export default function Trainers(){
             
                 {data.map((item,i)=>{
                     return(
-                        <div key={i} className={`trainers__item ${i%2==0 ? 'color_gray' : 'color_whute'}`}>
+                        <div key={i} className={`trainers__item ${i%2===0 ? 'color_gray' : 'color_whute'}`}>
                             <img src={item.img} alt='photo'/>
-                            <a className='trainer_FIO' href=''>{item.FIO}</a>
+                            <a className='trainer_FIO' href={`/trainer/${item.FIO}`}>{item.FIO}</a>
                             <div className='list_programs'>
                                 <p>Программы</p>
                                 <ol>
