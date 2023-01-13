@@ -31,7 +31,7 @@ app.get("/", function(request, response){
 app.use(multer({dest:"uploads"}).single("file"));
 
 
-const url = "mongodb://mongo:27017/";
+const url = "mongodb://localhost:27017/";
 const mongo = new MongoClient(url);
 
 async function createData(collection, pathToDataFile, flag){
