@@ -8,6 +8,7 @@ import ProgramsSubscriptionsPage from './ProgramsSubscriptionsPage';
 import Trainers from './Trainers';
 import ListOfClients from './ListOfClients';
 import TrainerCard from './TrainerCard';
+import Reviews from './Reviews';
 
 export default function AppRoutes() {
 
@@ -22,6 +23,7 @@ export default function AppRoutes() {
             <Route path='/trainers' element={<Trainers/>}/>
             <Route path='/listOfClients/:FIO' element={<ListOfClients/>}/>
             <Route path='/trainer/:FIO' element={<TrainerCard/>}/>
+            <Route path='/reviews' element={<Reviews/>}/>
         </Routes>
     );
 };
