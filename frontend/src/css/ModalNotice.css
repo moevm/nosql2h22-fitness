@@ -5,6 +5,7 @@
     position: fixed;
     right: 0px;
     width: 300px;
+    z-index: 100;
 }
 
 .modalNotice{
@@ -15,6 +16,7 @@
     border: 1px solid #000;
     border-radius: 5px;
     position: relative;
+    
 }
 
 .modalNotice .close_btn{
