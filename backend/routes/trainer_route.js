@@ -32,7 +32,7 @@ module.exports = function(app, collection) {
         if(currentPage>totalPages){
             currentPage = totalPages;
         }
-        if(currentPage<totalPages){
+        if(currentPage<1){
             currentPage = 1;
         }
         let pages_arr = [];
@@ -173,6 +173,9 @@ module.exports = function(app, collection) {
     app.post('/trainers_page/filter', (req, res) => {
         const programm = req.body.programm;
         const trainer = req.body.trainer;
+
+        const pageSize = Number(req.body.pageSize);
+        const currentPage = Number(req.body.currentPage);
     
         let parametres = 0;
         let programm_reg;
@@ -202,23 +205,43 @@ module.exports = function(app, collection) {
         }
 
         async function filterOnlyTwo() {
-            const tmp = await collection.find({$and:[{programm: programm_reg},{FIO: trainer_reg}]}).toArray();    
-            res.send(tmp);
+            const documents = await collection.find({$and:[{programm: programm_reg},{FIO: trainer_reg}]}).count();   
+            let pager = await pagination(documents, pageSize, currentPage);
+            let tmp;
+            if(pager.startIndex==0){
+                tmp = await collection.find({$and:[{programm: programm_reg},{FIO: trainer_reg}]}).limit(pageSize).toArray();
+            }else{
+                tmp = await collection.find({$and:[{programm: programm_reg},{FIO: trainer_reg}]}).skip(pager.startIndex).limit(pageSize).toArray();
+            }
+            res.send({data: tmp, pages: pager}) 
         }
         
         async function getAllDocuments() {
             try {
-                const tmp = await collection.find().toArray();
-                res.send(tmp)
-                 
+                const documents = await collection.countDocuments();
+                let pager = await pagination(documents, pageSize, currentPage);
+                let tmp;
+                if(pager.startIndex==0){
+                    tmp = await collection.find().limit(pageSize).toArray();
+                }else{
+                    tmp = await collection.find().skip(pager.startIndex).limit(pageSize).toArray();
+                }
+                res.send({data: tmp, pages: pager})
             }catch(err) {
                 console.log(err);
             }
         }
 
         async function filterOnlyOne() {
-            const tmp = await collection.find({$or:[{programm: programm_reg},{FIO: trainer_reg}]}).toArray();                                         
-            res.send(tmp);
+            const documents = await collection.find({$or:[{programm: programm_reg},{FIO: trainer_reg}]}).count();   
+            let pager = await pagination(documents, pageSize, currentPage);
+            let tmp;
+            if(pager.startIndex==0){
+                tmp = await collection.find({$or:[{programm: programm_reg},{FIO: trainer_reg}]}).limit(pageSize).toArray();
+            }else{
+                tmp = await collection.find({$or:[{programm: programm_reg},{FIO: trainer_reg}]}).skip(pager.startIndex).limit(pageSize).toArray();
+            }
+            res.send({data: tmp, pages: pager}) 
         }
 
     });

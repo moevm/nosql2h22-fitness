@@ -7,13 +7,18 @@ export default function Trainers(){
     const [data, setData] = useState([]);
     const [filterValueFIO, setFilterValueFIO] = useState('');
     const [filterValueProgram, setFilterValueProgram] = useState('');
+    const [pager, setPager] = useState({totalPages: 1, pages_arr: [1], startIndex: 0, currentPage: 1});
+    const [pageSize, setPageSize] = useState(10);
+    const [page, setPage] = useState(1);
 
     useEffect(()=>{
         axios
-            .get('/trainers')
+            .post('/trainers', {pageSize: pageSize, currentPage: 1})
             .then(res => {
                 console.log(res.data);
-                setData(res.data);
+                setData(res.data.data);
+                setPager(res.data.pages);
+                setPage(1);
             })
     },[])
 
@@ -26,14 +31,21 @@ export default function Trainers(){
             case 'program':
                 setFilterValueProgram(e.target.value);
                 axios
-                    .post('/trainers_page/filter', {trainer: filterValueFIO, programm: e.target.value})
+                    .post('/trainers_page/filter', {trainer: filterValueFIO, programm: e.target.value, pageSize: pageSize, currentPage: page})
                     .then(res => {
                         // console.log(res);
-                        setData(res.data);
+                        setData(res.data.data);
+                        setPager(res.data.pages);
                     })
                     .catch(err => {
                         console.log('err in data', err);
                     });
+                break;
+            case 'pageSize':
+                setPageSize(e.target.value);
+                break;
+            case 'page':
+                setPage(e.target.value);
                 break;
             default:
                 break;
@@ -42,15 +54,31 @@ export default function Trainers(){
 
     const handleClick = (e) => {
         e.stopPropagation();
-        axios
-            .post('/trainers_page/filter', {trainer: filterValueFIO, programm: filterValueProgram})
+        if(e.currentTarget.tagName==="BUTTON"){
+            axios
+            .post('/trainers_page/filter', {trainer: filterValueFIO, programm: filterValueProgram, pageSize: pageSize, currentPage: e.target.value})
             .then(res => {
                 // console.log(res);
-                setData(res.data);
+                setData(res.data.data);
+                setPager(res.data.pages);
             })
             .catch(err => {
                 console.log('err in data', err);
             });
+        }
+        if(e.currentTarget.tagName==="SELECT"){
+            axios
+            .post('/trainers_page/filter', {trainer: filterValueFIO, programm: filterValueProgram, pageSize: e.target.value, currentPage: page})
+            .then(res => {
+                // console.log(res);
+                setData(res.data.data);
+                setPager(res.data.pages);
+            })
+            .catch(err => {
+                console.log('err in data', err);
+            });
+        }
+        
     };
 
     const clearFilter = (e) => {
@@ -63,10 +91,11 @@ export default function Trainers(){
                 break;
         }
         axios
-            .post('/trainers_page/filter', {trainer: '', programm: filterValueProgram}) 
+            .post('/trainers_page/filter', {trainer: '', programm: filterValueProgram, pageSize: pageSize, currentPage: page}) 
             .then(res => {
                 // console.log(res);
-                setData(res.data);
+                setData(res.data.data);
+                setPager(res.data.pages);
             })
             .catch(err => {
                 console.log('err in data', err);
@@ -111,6 +140,27 @@ export default function Trainers(){
                         </div>
                     );
                 })}
+
+            <div className="pagination">
+                <button name='page' disabled={(pager.currentPage === 1) && true} value ={1} onClick={ (e) => {handleClick(e); handleChange(e)}} className= {`page-item first-item`}> 1 </button>
+                <button name='page' disabled={(pager.currentPage === 1) && true} value ={pager.currentPage-1} onClick={ (e) => {handleClick(e); handleChange(e)}} className={`page-item previous-item`}>&laquo;</button>
+                {pager.pages_arr.map(item =>
+                                <button key={item} name='page' value ={item} onClick={ (e) => {handleClick(e); handleChange(e)}} className={`page-item number-item ${pager.currentPage === item ? 'currpage' : ''}`}> {item}</button>
+                )}
+                <button name='page' disabled={(pager.currentPage === pager.totalPages) && true} value ={pager.currentPage+1} onClick={ (e) => {handleClick(e); handleChange(e)}} className={`page-item next-item`}>&raquo;</button>
+                <button name='page' disabled={(pager.currentPage === pager.totalPages)&& true} value ={pager.totalPages} onClick={ (e) => {handleClick(e); handleChange(e)}} className={`page-item last-item`}>{pager.totalPages}</button>
+            </div>
+
+            <div className="pagination-select">
+            <p>Количество строк: </p>
+                <select name='pageSize' onChange={ (e) => {handleClick(e); handleChange(e)} }>
+                    <option value={10}>10</option>
+                    <option value={15}>15</option>
+                    <option value={20}>20</option>
+                </select>
+            </div>
+
+
         </div>
     );
 };

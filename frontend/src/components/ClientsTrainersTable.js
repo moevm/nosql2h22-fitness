@@ -105,7 +105,7 @@ export default function ClientsTrainersTable(props){
                 break;
         }
         axios
-            .post(`/${props.name_DB}/filter`, {fio: curFilterValueFIO, tel: curFilterValueTel, email: curFilterValueEmail, pageSize: 10, currentPage: e.target.value})
+            .post(`/${props.name_DB}/filter`, {fio: curFilterValueFIO, tel: curFilterValueTel, email: curFilterValueEmail, pageSize: pageSize, currentPage: page})
             .then(res => {
                 // console.log(res);
                 // setData([]);

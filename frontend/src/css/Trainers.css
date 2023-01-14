@@ -79,3 +79,59 @@
 	line-height: 1.5;
 	text-align: left;
 }
+
+.pagination{
+    margin-top: 20px;
+    align-items: center;
+}
+.page-item{
+    background-color: #e0e0e0; 
+    font-size: 16px;
+    color: black;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.page-item:hover {
+    background-color: #29323d; 
+    color: white;
+}
+
+.page-item[disabled] {
+    color: #d2d5db;
+    background: #6c7589;
+    cursor: not-allowed;
+}
+.currpage {
+    background-color: #29323d; 
+    color: white;
+}
+.pagination-select select{
+    background-color: #e0e0e0; 
+    font-size: 16px;
+    color: black;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.pagination-select select:hover {
+    background-color: #29323d; 
+    color: white;
+}
+.pagination-select p{
+    display: inline;
+    font-size: 16px;
+    color: black;
+}
+
+.previous-item{
+    margin-right: 13px;
+}
+
+.next-item{
+    margin-left: 13px;
+}
