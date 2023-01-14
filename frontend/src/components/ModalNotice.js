@@ -1,42 +1,21 @@
 import '../css/ModalNotice.css';
 import {io} from "socket.io-client";
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 const socket = io();
  
 export default function ModalNotice(props){
-    const [notices, setNotices] = useState([]);
 
     useEffect(()=>{
-        axios
-            .get('/notice')
-            .then(res => {
-                console.log(res.data);
-                setNotices(res.data);
-            });
         socket.on('update_noticeClient', ()=>{
             console.log('update_noticeClient');
             if(sessionStorage.length && JSON.parse(sessionStorage.getItem('autoriz')).type === 'client')
                 document.getElementById('PA_notice_user').classList.add('new_notice');
-            axios
-                .get('/notice')
-                .then(res => {
-                    console.log(res.data);
-                    setNotices(res.data);
-                });    
         })
         socket.on('update_noticeAll', ()=>{
             console.log('update_noticeAll');
             document.getElementById('PA_notice_user').classList.add('new_notice');
-            axios
-                .get('/notice')
-                .then(res => {
-                    console.log(res.data);
-                    setNotices(res.data);
-                });
         })
-        
     },[]);
 
     return props.isOpenModalNotice ? (
@@ -47,7 +26,7 @@ export default function ModalNotice(props){
         }}>
             <div className="modalNotice">
                 <button className='close_btn' onClick={()=>props.setClose(false)}/>
-                {notices.map(item => {
+                {props.notices.map(item => {
                     if(sessionStorage.length && JSON.parse(sessionStorage.getItem('autoriz')).type === 'client'){
                         return(
                             <div key={item.notice} className='notice_content'>

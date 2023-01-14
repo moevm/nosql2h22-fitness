@@ -6,11 +6,13 @@ import exit from '../img/exit.png';
 
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
+import axios from 'axios';
 import ModalNotice from './ModalNotice';
 
 function Header() {
     let navigate = useNavigate();
     const [isOpenModalNotice, setOpenModalNotice] = useState(false);
+    const [notices, setNotices] = useState([]);
 
     const openPage = (path) => {
         navigate(path);
@@ -44,6 +46,12 @@ function Header() {
                         <img id='PA_notice_user' src={icon} alt='notice' onClick={()=>{
                             document.getElementById('PA_notice_user').classList.remove('new_notice');
                             setOpenModalNotice(true);
+                            axios
+                                .get('/notice')
+                                .then(res => {
+                                    console.log(res.data);
+                                    setNotices(res.data);
+                                });
                         }}/>
                         <button id='PA_btn' onClick={() => openPage(`/user/${user}`)}>ЛК</button>
                         <button id='exit_btn' onClick={ () => exitPA() }><img id='exit_icon' src={exit} alt='exit'/></button>
@@ -73,7 +81,7 @@ function Header() {
                 </table>
                 {selectButton()}
             </div>
-            <ModalNotice isOpenModalNotice={isOpenModalNotice} setClose={setOpenModalNotice} />
+            <ModalNotice isOpenModalNotice={isOpenModalNotice} setClose={setOpenModalNotice} notices={notices}/>
         </div>
     );
 };
