@@ -9,6 +9,7 @@ import Trainers from './Trainers';
 import ListOfClients from './ListOfClients';
 import TrainerCard from './TrainerCard';
 import Reviews from './Reviews';
+import AdminNotice from './AdminNotice';
 
 export default function AppRoutes() {
 
@@ -24,6 +25,7 @@ export default function AppRoutes() {
             <Route path='/listOfClients/:FIO' element={<ListOfClients/>}/>
             <Route path='/trainer/:FIO' element={<TrainerCard/>}/>
             <Route path='/reviews' element={<Reviews/>}/>
+            <Route path='/notice' element={<AdminNotice/>}/>
         </Routes>
     );
 };

@@ -57,6 +57,14 @@
     width: 36px;
     height: 36px;
 }
+
+#PA_notice_user{
+    width: 36px;
+    height: 36px;
+}
+.new_notice{
+    background-color: #0c97e74d;
+}
 #exit_icon{
     width: 20px;
     height: 25px;
