@@ -178,31 +178,17 @@ mongo.connect(function(err, client){
 
     io.on('connection', function(socket) {
 
-        socket.on('noticeForClient', function(message) {
+        socket.on('noticeForClient', async function(message) {
             console.log('noticeForClient');
             console.log(message);
-            notice_collection.insertOne(message, (err, result)=>{
-                if (err) { 
-                    console.log('error: An error has occurred notice'); 
-                } 
-                else {
-                    console.log('уведомление добавлено');
-                }
-            });
+            await addNotice(message);
             socket.broadcast.emit('update_noticeClient');
         });
 
-        socket.on('noticeForAll', function(message) {
+        socket.on('noticeForAll', async function(message) {
             console.log('noticeForAll')
             console.log(message);
-            notice_collection.insertOne(message, (err, result)=>{
-                if (err) { 
-                    console.log('error: An error has occurred notice'); 
-                } 
-                else {
-                    console.log('уведомление добавлено');
-                }
-            });
+            await addNotice(message);
             socket.broadcast.emit('update_noticeAll');
         });
     });
@@ -218,6 +204,17 @@ mongo.connect(function(err, client){
         }catch(err) {
             console.log(err);
         }
+    }
+
+    async function addNotice(message){
+        notice_collection.insertOne(message, (err, result)=>{
+            if (err) { 
+                console.log('error: An error has occurred notice'); 
+            } 
+            else {
+                console.log('уведомление добавлено');
+            }
+        });
     }
     
     async function exportFile(collection, collection_name){
