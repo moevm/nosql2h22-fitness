@@ -27,14 +27,32 @@ module.exports = function(app, collection) {
         });
     });
 
+    async function pagination(documents, pageSize, currentPage){
+        const totalPages = Math.ceil(documents/pageSize);
+        if(currentPage>totalPages){
+            currentPage = totalPages;
+        }
+        if(currentPage<totalPages){
+            currentPage = 1;
+        }
+        let pages_arr = [];
+        for(let i=1; i<= totalPages; i++){
+            pages_arr[i-1] = i;
+        }
+        const startIndex =  (currentPage-1)*pageSize;
+        return {totalPages: totalPages, pages_arr: pages_arr, startIndex: startIndex, currentPage: currentPage}
+    }
+
     // Получение всех документов коллекции
-    app.get('/trainers', (req, res) => {
+    app.post('/trainers', (req, res) => {
+        const pageSize = Number(req.body.pageSize);
+        const currentPage = Number(req.body.currentPage);
         async function getAllDocuments() {
             try {
-                const tmp = await collection.find().toArray();
-                // console.log(tmp);
-                res.send(tmp)
-                 
+                documents = await collection.countDocuments();
+                let pager = await pagination(documents, pageSize, currentPage);
+                const tmp = await collection.find().limit(10).toArray();
+                res.send({data: tmp, pages: pager})
             }catch(err) {
                 console.log(err);
             }
@@ -46,7 +64,10 @@ module.exports = function(app, collection) {
         const fio = req.body.fio;
         const tel = req.body.tel;
         const email = req.body.email;
-        
+
+        const pageSize = Number(req.body.pageSize);
+        const currentPage = Number(req.body.currentPage);
+
         let arr = [fio, tel, email];
         let parametres = 0;
         let fio_reg;
@@ -89,26 +110,60 @@ module.exports = function(app, collection) {
 
         async function filterOnlyTwo() {
             // console.log("я тут, флаг 3");
-            const tmp = await collection.find({$or:[{$and:[{FIO: fio_reg},{telephone: tel_reg}]},
+            const documents = await collection.find({$or:[{$and:[{FIO: fio_reg},{telephone: tel_reg}]},
                                                             {$and:[{FIO: fio_reg},{email: email_reg}]},
                                                             {$and:[{telephone: tel_reg},{email: email_reg}]}
-                                                            ]}).toArray();    
-            res.send(tmp);
+            ]}).count();    
+            let pager = await pagination(documents, pageSize, currentPage)  
+            let tmp;
+            if(pager.startIndex==0){
+                tmp = await collection.find({$or:[{$and:[{FIO: fio_reg},{telephone: tel_reg}]},
+                                                  {$and:[{FIO: fio_reg},{email: email_reg}]},
+                                                  {$and:[{telephone: tel_reg},{email: email_reg}]}
+                ]}).limit(pageSize).toArray(); 
+            }else{
+                tmp = await collection.find({$or:[{$and:[{FIO: fio_reg},{telephone: tel_reg}]},
+                                                  {$and:[{FIO: fio_reg},{email: email_reg}]},
+                                                  {$and:[{telephone: tel_reg},{email: email_reg}]}
+                ]}).skip(pager.startIndex).limit(pageSize).toArray();
+            }
+            res.send({data: tmp, pages: pager})
         }
 
         async function filterOnlyOne() {
-            const tmp = await collection.find({$or:[{FIO: fio_reg},{telephone: tel_reg},{email: email_reg}]}).toArray(); 
-            res.send(tmp);
+            const documents = await collection.find({$or:[{FIO: fio_reg},{telephone: tel_reg},{email: email_reg}]}).count(); 
+            let pager = pagination(documents, pageSize, currentPage);
+            let tmp;
+            if(pager.startIndex==0){
+                tmp = await collection.find({$or:[{FIO: fio_reg},{telephone: tel_reg},{email: email_reg}]}).limit(pageSize).toArray();
+            }else{
+                tmp = await collection.find({$or:[{FIO: fio_reg},{telephone: tel_reg},{email: email_reg}]}).skip(pager.startIndex).limit(pageSize).toArray();
+            }
+            res.send({data: tmp, pages: pager})
         }
 
         async function filterAll() {
-            const tmp = await collection.find({FIO: fio_reg, telephone: tel_reg, email: email_reg}).toArray();                                          
-            res.send(tmp);
+            const documents = await collection.find({FIO: fio_reg, telephone: tel_reg, email: email_reg}).count();                                          
+            let pager = pagination(documents, pageSize, currentPage)  
+            let tmp;
+            if(pager.startIndex==0){
+                tmp = await collection.find({FIO: fio_reg, telephone: tel_reg, email: email_reg}).limit(pageSize).toArray();
+            }else{
+                tmp = await collection.find({FIO: fio_reg, telephone: tel_reg, email: email_reg}).skip(pager.startIndex).limit(pageSize).toArray();
+            }
+            res.send({data: tmp, pages: pager})
         }
         async function getAllDocuments() {
             try {
-                const tmp = await collection.find().toArray();
-                res.send(tmp)
+                const documents = await collection.countDocuments();
+                let pager = await pagination(documents, pageSize, currentPage);
+                let tmp;
+                if(pager.startIndex==0){
+                    tmp = await collection.find().limit(pageSize).toArray();
+                }else{
+                    tmp = await collection.find().skip(pager.startIndex).limit(pageSize).toArray();
+                }
+                res.send({data: tmp, pages: pager})
             }catch(err) {
                 console.log(err);
             }
