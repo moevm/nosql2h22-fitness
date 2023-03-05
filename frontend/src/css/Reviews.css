@@ -1,0 +1,158 @@
+.Reviews__box{
+    margin: 20px 50px;
+}
+
+.Reviews__box > .title{
+    font-size: 36px;
+    font-style: bold;
+    font-weight: 700;
+    line-height: 42px;
+    color: #3b4754;
+}
+
+.sort-container{
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    color: #3b4754;
+    font-weight: 500;
+    font-size: 18px;
+}
+.sort-container > select, .sort-container > input{
+    width: 180px;
+    height: 32px;
+    padding: 4px 8px;
+    margin-left: 10px;
+    background: white;
+    border: 1px solid #232323;
+    border-radius: 4px;
+    font-family: "Helvetica";
+    font-weight: 400;
+    font-size: 14px;
+    text-align: left;
+}
+
+.reviews-container{
+    padding: 20px 0;
+}
+
+.review-content{
+    margin: 20px 0;
+    padding: 10px 20px;
+    border: 1px solid #798da3;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.review-content > .content{
+    color: #29323d;
+    font-weight: 400;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.5;
+    padding-bottom: 20px;
+}
+
+.review-content > .author{
+    display: flex;
+    align-items: center;
+}
+.review-content > .author img{
+    width: 50px;
+}
+.review-content .author_name{
+    padding-left: 10px;
+    color: #3b4754;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.1;
+}
+
+.input_review{
+    display: flex;
+    flex-direction: column;
+}
+.input_review > textarea{
+    width: 50%;
+    min-height: 100px;
+    padding: 4px 8px;
+    margin: 20px 0 10px 0;
+    background: #ffffff;
+    border:1px solid #232323;
+    border-radius: 10px;
+    font-family: "Helvetica";
+    font-weight: 400;
+    font-size: 18px;
+    text-align: left;
+}
+.input_review > button{
+    width: 127px;
+    height: 36px;
+    margin: 10px 0 50px 0;
+    padding: 0px 10px;
+    background: #ebebeb;
+    color: #232323;
+    border:1px solid #232323;
+    border-radius: 5px;
+    font-family: "Helvetica";
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+.pagination{
+    margin-top: 20px;
+    align-items: center;
+}
+.page-item{
+    background-color: #e0e0e0; 
+    font-size: 16px;
+    color: black;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.page-item:hover {
+    background-color: #29323d; 
+    color: white;
+}
+
+.page-item[disabled] {
+    color: #d2d5db;
+    background: #6c7589;
+    cursor: not-allowed;
+}
+.currpage {
+    background-color: #29323d; 
+    color: white;
+}
+.pagination-select select{
+    background-color: #e0e0e0; 
+    font-size: 16px;
+    color: black;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.pagination-select select:hover {
+    background-color: #29323d; 
+    color: white;
+}
+.pagination-select p{
+    display: inline;
+    font-size: 16px;
+    color: black;
+}
+
+.previous-item{
+    margin-right: 13px;
+}
+
+.next-item{
+    margin-left: 13px;
+}

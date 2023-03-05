@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 export default function FormSingIn(){
     const [login, setLogin] = useState({value: ''});
@@ -19,15 +20,37 @@ export default function FormSingIn(){
         }
     };
 
-    const handleSubmit = () => {
-        if(login.value === 'admin' && pass.value === 'admin01'){
-            navigate('/user/admin');
-        }
-        sessionStorage.setItem('autoriz', login.value);
+    const handleClick = () => {
+        axios
+            .post('/login', {email: login.value, pwd: pass.value})
+            .then(res => {
+                if(typeof (res.data) === 'string'){
+                    alert(res.data);
+                }
+                else{
+                    sessionStorage.setItem('autoriz', JSON.stringify({type: res.data.type, FIO: res.data.FIO}));
+                    switch(res.data.type){
+                        case 'admin':
+                            navigate(`/user/admin`);
+                            break;
+                        case 'client':
+                            navigate(`/user/client`);
+                            break;
+                        case 'trainer':
+                            navigate(`/user/trainer`);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            })
+            .catch(err => {
+                console.log('err in data', err);
+            });
     };
 
     return(
-        <form onSubmit={()=>handleSubmit()}>
+        <div className='form'>
             <div className='items'>
                 <p>Логин</p>
                 <input id='login' type='text' value={login.value} onChange={handleChange}/>
@@ -37,8 +60,8 @@ export default function FormSingIn(){
                 <input id='password' type='password' value={pass.value} onChange={handleChange}/>
             </div>
             <div>
-                <button id='singIn' type='submit'>Войти</button>
+                <button id='singIn' onClick={()=>handleClick()}>Войти</button>
             </div>
-        </form>
+        </div>
     );
 };

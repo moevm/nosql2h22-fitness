@@ -1,0 +1,37 @@
+.TrainerCard__box{
+    margin: 20px 50px;
+}
+
+.TrainerCard__box > .title{
+    font-size: 30px;
+    font-weight: bold;
+    color: #3b4754;
+}
+
+.TrainerCard_content{
+    display: flex;
+    justify-content: space-around;
+    margin: 50px 0;
+}
+
+.TrainerCard_content > .item_info{
+    width: 40%;
+    font-weight: 400;
+	font-size: 18px;
+	line-height: 1.5;
+	text-align: left;
+}
+
+.item_info > ol{
+	padding: 0 50px;
+    list-style-type: decimal;
+}
+
+.item_info > p{
+    margin-bottom: 20px;
+}
+
+.TrainerCard_content > .item_img > img{
+    max-width: 70%;
+    border-radius: 10px;
+}

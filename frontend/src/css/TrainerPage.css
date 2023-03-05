@@ -1,0 +1,134 @@
+.TrainerPage__box{
+    display: flex;
+    padding: 50px 60px;
+    justify-content: center;
+}
+
+.calendar-container{
+    width: 54%;
+}
+.react-calendar{
+    width: 100%;
+    border-radius: 10px;
+}
+.react-calendar__navigation{
+    border-radius: 10px 10px 0 0;
+    background-color: #eeeded;
+}
+.react-calendar__navigation button{
+    font-size: 20px;
+}
+.react-calendar__navigation__label{
+    font-size: 20px;
+}
+.react-calendar__viewContainer abbr{
+    font-size: 20px;
+}
+.react-calendar__tile{
+    padding: 10px;
+    line-height: 30px;
+}
+.react-calendar__month-view__weekdays{
+    margin-bottom: 30px;
+}
+.react-calendar__month-view{
+    margin: 25px 0;
+}
+
+.events_filters-container{
+    display: flex;
+    flex-direction: column;
+    width: 22%;
+    margin: 0 50px;
+}
+.events_filters-container .cell_filter{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.events_filters-container .filter_title{
+    font-size: 18px;
+    line-height: 20px;
+}
+.events_filters-container .filter_Time{
+    position: relative;
+    margin-left: 5px;
+    width: 100px;
+    height: 30px;
+    padding-left: 15px;
+    border-radius: 42px;
+    border: 2px solid #324b4e;
+    background: #fff;
+}
+.events_filters-container .filter_Time input {
+    height: 25px;
+    position: absolute;
+    left: 12px;
+}
+.events_filters-container .filter_time_interval{
+    display: flex;
+}
+.events_filters-container .filter_time_input{
+    display: flex;
+    align-items: center;
+}
+.events_filters-container .filter_time_input p{
+    font-weight: normal;
+    margin-left: 10px;
+}
+.events_filters-container .filter_time_interval button, .events_filters-container .filter_time_interval .clear_btn{
+    width: 42px;
+    height: 30px;
+    background: none;
+    border: none;
+}
+.events_filters-container .filter_time_interval button:before{
+    content: "\f002";
+    font-family: FontAwesome;
+    color: #324b4e;
+}
+.events_filters-container .filter_time_interval .clear_btn:before{
+    content: "\2716";
+    font-family: FontAwesome;
+    color: #324b4e;
+}
+.events_filters-container .filter_time_btn{
+    width: 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.events_filters-container .events-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+.TrainerPage__box .selected_date{
+    width: 80%;
+    border: 1px solid #000;
+    border-radius: 10px;
+    background-color: #3a3ea32a;
+    font-size: 18px;
+    line-height: 20px;
+    padding: 8px;
+}
+.TrainerPage__box .event-content{
+    width: 80%;
+    min-height: 50px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    text-align: left;
+    font-size: 18px;
+    line-height: 20px;
+    padding: 8px;
+    margin-top: 20px;
+    word-wrap: break-word;
+}
+.event-content > ol{
+    padding: 10px 0 0 18px;
+}

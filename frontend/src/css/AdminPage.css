@@ -81,7 +81,7 @@
     font-size: 18px;
 }
 
-.cell_filter{
+.adminPage__box .cell_filter{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -136,7 +136,7 @@
     color: #324b4e;
 }
 
-.filter_Time{
+.adminPage__box .filter_Time{
     position: relative;
     margin-left: 10px;
     width: 100px;
@@ -146,44 +146,45 @@
     border: 2px solid #324b4e;
     background: #fff;
 }
-.filter_Time input {
+.adminPage__box .filter_Time input {
     height: 25px;
     position: absolute;
     left: 12px;
 }
-.filter_time_interval{
+.adminPage__box .filter_time_interval{
     /* position: relative; */
     display: flex;
 }
-.filter_time_input p{
+.adminPage__box .filter_time_input p{
     font-weight:normal;
 }
-.filter_time_interval button, .filter_time_interval .clear_btn{
+.adminPage__box .filter_time_interval button, .adminPage__box .filter_time_interval .clear_btn{
     width: 42px;
     height: 30px;
     background: none;
     border: none;
 }
-.filter_time_interval button:before{
+.adminPage__box .filter_time_interval button:before{
     content: "\f002";
     font-family: FontAwesome;
     color: #324b4e;
 }
-.filter_time_interval .clear_btn:before{
+.adminPage__box .filter_time_interval .clear_btn:before{
     content: "\2716";
     font-family: FontAwesome;
     color: #324b4e;
 }
-.filter_time_btn{
+.adminPage__box .filter_time_btn{
     width: 42px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.calendar-container{
-    width: 24%;
+.timetable_box .calendar-container{
+    width: 25%;
     font-size: 18px;
+    margin-right: 40px;
 }
 
 .react-calendar{
@@ -194,4 +195,101 @@
 }
 .react-calendar__navigation__label{
     font-size: 18px;
+}
+
+.export_import_container{
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+.selectDB{
+    display: none;
+}
+.export_import_container form{
+    margin: 0 10px;
+}
+.export_import_container .inputFile{
+    height: 42px;
+    font-size: 14px;
+}
+.export_import_container .btn{
+    width: 150px;
+    height: 42px;
+    padding: 0 10px;
+    background-color: #29323d;
+    color: white;
+    border-radius: 21px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.adminPage__box .title{
+    margin: 20px 0;
+    font-size: 26px;
+    font-weight: bold;
+    color: #3b4754;
+    text-align: left;
+}
+.adminPage__box .subtitle{
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3b4754;
+    text-align: left;
+}
+
+.pagination{
+    margin-top: 20px;
+    align-items: center;
+}
+.page-item{
+    background-color: #e0e0e0; 
+    font-size: 16px;
+    color: black;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.page-item:hover {
+    background-color: #29323d; 
+    color: white;
+}
+
+.page-item[disabled] {
+    color: #d2d5db;
+    background: #6c7589;
+    cursor: not-allowed;
+}
+.currpage {
+    background-color: #29323d; 
+    color: white;
+}
+.pagination-select select{
+    background-color: #e0e0e0; 
+    font-size: 16px;
+    color: black;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.pagination-select select:hover {
+    background-color: #29323d; 
+    color: white;
+}
+.pagination-select p{
+    display: inline;
+    font-size: 16px;
+    color: black;
+}
+
+.previous-item{
+    margin-right: 13px;
+}
+
+.next-item{
+    margin-left: 13px;
 }

@@ -8,6 +8,8 @@ const jsonParser = express.json();
 const multer = require('multer');
 const port = 3001;
 
+const http = require('http');
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -28,15 +30,20 @@ app.get("/", function(request, response){
     response.send("<h1>Главная страница сервера </h1>");
 });
 
-app.use(multer({dest:"uploads"}).single("filedata"));
+app.use(multer({dest:"uploads"}).single("file"));
 
 
-const url = "mongodb://localhost:27017/";
+const url = "mongodb://mongo:27017/";
 const mongo = new MongoClient(url);
 
-async function createData(collection, pathToDataFile){
+async function createData(collection, pathToDataFile, flag){
     data_file = await fs.readFileSync(`${pathToDataFile}`);
     docs = await JSON.parse(data_file.toString());
+    if(flag){
+        for(let i = 0; i < docs.length; i++){
+        docs[i].time = Date.parse(docs[i].time);
+        }
+    }
     await collection.insertMany(docs, function(err, result) {
         if (err) throw err;
         console.log(`Inserted docs from ${pathToDataFile}:`, result.insertedCount);
@@ -49,29 +56,38 @@ async function deleteData(collection) {
 }
 
 mongo.connect(function(err, client){
-
+    console.log("Connection");
     const db = client.db("fitnessDB");
     const clients_collection = db.collection('clients');
     const trainer_collection = db.collection('trainer');
     const users_collection = db.collection('users');
     const timetable_collection = db.collection('timetable')
+    const review_collection = db.collection('review')
+    const notice_collection = db.collection('notice');
 
-    let path_client = './data/out_clients.json';
-    let path_timetable = './data/out_timetable.json';
-    let path_trainer = './data/out_trainer.json';
-    let path_users = './data/out_users.json';
-    
+    const data_clients = fs.readFileSync('./data/out_clients.json');
+    const data_trainer = fs.readFileSync('./data/out_trainers.json');
+    const data_users = fs.readFileSync('./data/out_users.json');
+    const data_timetable = fs.readFileSync('./data/out_timetable.json');
+    const data_review = fs.readFileSync('./data/out_review.json');
+    const data_notice = fs.readFileSync('./data/out_notice.json');
+
     const docs_clients = JSON.parse(data_clients.toString());
     const docs_trainer = JSON.parse(data_trainer.toString());
     const docs_users = JSON.parse(data_users.toString());
     const docs_timetable = JSON.parse(data_timetable.toString());
+    const docs_review = JSON.parse(data_review.toString());
+    const docs_notice = JSON.parse(data_notice.toString());
+    
     // console.log(docs_timetable);
     for(let i = 0; i < docs_timetable.length; i++){
         docs_timetable[i].time = Date.parse(docs_timetable[i].time);
         // console.log(docs_timetable[i].time);
     }
-    
-
+    for(let i = 0; i < docs_review.length; i++){
+        docs_review[i].date = Date.parse(docs_review[i].date);
+        // console.log(docs_timetable[i].time);
+    }
     
     clients_collection.insertMany(docs_clients, function(err, result) {
             if (err) throw err;
@@ -89,38 +105,48 @@ mongo.connect(function(err, client){
         if (err) throw err;
         console.log('Inserted docs_timetable:', result.insertedCount);
     });
+    review_collection.insertMany(docs_review, function(err, result) {
+        if (err) throw err;
+        console.log('Inserted docs_review:', result.insertedCount);
+    });
+    notice_collection.insertMany(docs_notice, function(err, result) {
+        if (err) throw err;
+        console.log('Inserted docs_notice:', result.insertedCount);
+    });
 
     require('./routes/client_route')(app, db);
     require('./routes/trainer_route')(app, trainer_collection);
     require('./routes/users_route')(app, db);
     require('./routes/timetable_route')(app, timetable_collection);
+    require('./routes/review_route')(app, review_collection);
+    require('./routes/notice_route.js')(app, notice_collection);
     
     app.post("/upload", function (req, res, next) {
         let filedata = req.file;
         // clients, timetables, trainer, users
         let collection_name = req.body.select;
         // console.log(filedata);
-        fs.rename(req.file.path, 'uploads/out_' + collection_name + '.json', function (err) {
+        fs.rename(req.file.path, 'data/out_' + collection_name + '.json', function (err) {
             if (err) throw err;
              console.log('renamed complete');
        });
 
        if(collection_name == 'clients'){
         deleteData(clients_collection);
-        let path = `./uploads/out_${collection_name}.json`
-        createData(clients_collection, path);
+        let path = `./data/out_${collection_name}.json`
+        createData(clients_collection, path, false);
        }else if(collection_name == 'timetable'){
         deleteData(timetable_collection);
-        let path = `./uploads/out_${collection_name}.json`
-        createData(timetable_collection, path);
-       }else if(collection_name == 'trainer'){
+        let path = `./data/out_${collection_name}.json`
+        createData(timetable_collection, path, true);
+       }else if(collection_name == 'trainers'){
         deleteData(trainer_collection);
-        let path = `./uploads/out_${collection_name}.json`
-        createData(trainer_collection, path);
+        let path = `./data/out_${collection_name}.json`
+        createData(trainer_collection, path, false);
        }else if(collection_name == 'users'){
         deleteData(users_collection);
-        let path = `./uploads/out_${collection_name}.json`
-        createData(users_collection, path);
+        let path = `./data/out_${collection_name}.json`
+        createData(users_collection, path, false);
        }else{
             res.send('Имя коллекции некорректное')
        }
@@ -130,23 +156,44 @@ mongo.connect(function(err, client){
             res.send("Файл загружен");
     });
 
-    app.post("/download", function (req, res, next) {
+    app.post("/download", async function (req, res, next) {
+
         let collection_name = req.body.select;
         if(collection_name == 'clients'){
-            exportFile(clients_collection, collection_name)
+            await exportFile(clients_collection, collection_name)
         }else if(collection_name == 'timetable'){
-            exportFile(timetable_collection, collection_name)
-        }else if(collection_name == 'trainer'){
-            exportFile(trainer_collection, collection_name)
+            await exportFile(timetable_collection, collection_name)
+        }else if(collection_name == 'trainers'){
+           await exportFile(trainer_collection, collection_name)
         }else if(collection_name == 'users'){
-            exportFile(users_collection, collection_name)
+           await exportFile(users_collection, collection_name)
         }else{
             res.send('Имя коллекции некорректное')
         }
-        res.download(`./data/out_${collection_name}.json`);
+        await res.download(`./data/out_${collection_name}.json`);
     });
 
-    app.listen(port, ()=>{
+    const httpserver = http.createServer(app);
+    const io = require("socket.io")(httpserver);
+
+    io.on('connection', function(socket) {
+
+        socket.on('noticeForClient', async function(message) {
+            console.log('noticeForClient');
+            console.log(message);
+            await addNotice(message);
+            socket.broadcast.emit('update_noticeClient');
+        });
+
+        socket.on('noticeForAll', async function(message) {
+            console.log('noticeForAll')
+            console.log(message);
+            await addNotice(message);
+            socket.broadcast.emit('update_noticeAll');
+        });
+    });
+
+    httpserver.listen(port, ()=>{
         console.log("Server started at http://localhost:3001");
     });  
 
@@ -157,6 +204,17 @@ mongo.connect(function(err, client){
         }catch(err) {
             console.log(err);
         }
+    }
+
+    async function addNotice(message){
+        notice_collection.insertOne(message, (err, result)=>{
+            if (err) { 
+                console.log('error: An error has occurred notice'); 
+            } 
+            else {
+                console.log('уведомление добавлено');
+            }
+        });
     }
     
     async function exportFile(collection, collection_name){
@@ -174,24 +232,35 @@ mongo.connect(function(err, client){
             trainer_data = await getAllDocuments(trainer_collection);
             users_data = await getAllDocuments(users_collection);
             timetable_data = await getAllDocuments(timetable_collection);
-            
-            for(let i = 0; i < timetable_data.length; i++){
-                timetable_data[i].time = new Date(docs_timetable[i].time).toISOString();
-            }
-            
+            review_data = await getAllDocuments(review_collection);
+            notice_data = await getAllDocuments(notice_collection);
+
             await clients_collection.deleteMany({});
             await trainer_collection.deleteMany({});
             await users_collection.deleteMany({});
             await timetable_collection.deleteMany({});
-            
+            await review_collection.deleteMany({});
+            await notice_collection.deleteMany({});
+
+            for(let i = 0; i < timetable_data.length; i++){
+                timetable_data[i].time = new Date(timetable_data[i].time).toISOString();
+            }
+            for(let i = 0; i < review_data.length; i++){
+                review_data[i].date = new Date(review_data[i].date).toISOString();
+            }
+        
             fs.writeFileSync('./data/out_clients.json', JSON.stringify(clients_data));
             console.log('Done writing to clients file.');
-            fs.writeFileSync('./data/out_trainer.json', JSON.stringify(trainer_data));
+            fs.writeFileSync('./data/out_trainers.json', JSON.stringify(trainer_data));
             console.log('Done writing to trainer file.');
             fs.writeFileSync('./data/out_users.json', JSON.stringify(users_data));
             console.log('Done writing to users file.');
             fs.writeFileSync('./data/out_timetable.json', JSON.stringify(timetable_data));
             console.log('Done writing to timetable file.');
+            fs.writeFileSync('./data/out_review.json', JSON.stringify(review_data));
+            console.log('Done writing to review file.');
+            fs.writeFileSync('./data/out_notice.json', JSON.stringify(notice_data));
+            console.log('Done writing to notice file.');
             
             await client.close()
         }
@@ -199,6 +268,8 @@ mongo.connect(function(err, client){
         ctrlcPressed++;
         process.exit();
     }
+
+    process.on("SIGTERM", onInterrupt);
 
     process.on("SIGINT", onInterrupt);
 });

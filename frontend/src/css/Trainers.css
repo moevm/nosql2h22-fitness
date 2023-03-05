@@ -1,0 +1,137 @@
+.trainers{
+    display: flex;
+    flex-direction: column;
+    color: #3b4754;
+}
+.trainers .title{
+    margin-top: 20px;
+    font-size: 36px;
+    font-style: bold;
+    font-weight: 700;
+    line-height: 42px;
+}
+
+.trainers__filters{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 50px;
+}
+.filter_select{
+    flex-grow: 0.44;
+    text-align: right;
+}
+.filter_select select{
+    width: 180px;
+    height: 32px;
+    padding: 4px 8px 4px 8px;
+    margin-right: 15%;
+    background: white;
+    border-color: #232323;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px 4px 4px 4px;
+    font-family: "Helvetica";
+    font-weight: 400;
+    font-size: 14px;
+    text-align: left;
+}
+
+.trainers__item{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 200px;
+}
+.color_gray{
+    background-color: #edf0f4;
+}
+.color_white{
+    background-color: #fff;
+}
+.trainers__item img{
+    width: 250px;
+    max-height: 185px;
+    border-radius: 10px;
+}
+.trainer_FIO{
+    width: 30%;
+    color: #3b4754;
+    font-weight: 700;
+    font-size: 28px;
+    text-decoration: underline;
+    line-height: 1.3;
+}
+.list_programs{
+    width: 14%;
+    text-align: center;
+}
+.list_programs p{
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 2;
+}
+.list_programs > ol{
+	padding: 0 50px;
+    list-style-type: decimal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 1.5;
+	text-align: left;
+}
+
+.pagination{
+    margin-top: 20px;
+    align-items: center;
+}
+.page-item{
+    background-color: #e0e0e0; 
+    font-size: 16px;
+    color: black;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.page-item:hover {
+    background-color: #29323d; 
+    color: white;
+}
+
+.page-item[disabled] {
+    color: #d2d5db;
+    background: #6c7589;
+    cursor: not-allowed;
+}
+.currpage {
+    background-color: #29323d; 
+    color: white;
+}
+.pagination-select select{
+    background-color: #e0e0e0; 
+    font-size: 16px;
+    color: black;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.pagination-select select:hover {
+    background-color: #29323d; 
+    color: white;
+}
+.pagination-select p{
+    display: inline;
+    font-size: 16px;
+    color: black;
+}
+
+.previous-item{
+    margin-right: 13px;
+}
+
+.next-item{
+    margin-left: 13px;
+}
